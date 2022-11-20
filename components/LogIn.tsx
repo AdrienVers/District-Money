@@ -42,7 +42,7 @@ const LogInForm = styled.form`
 
     .formTitle {
       font-size: 2.2rem;
-      font-weight : normal;
+      font-weight: normal;
       margin: 0;
       padding: 0;
     }
