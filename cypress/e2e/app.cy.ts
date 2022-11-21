@@ -6,3 +6,5 @@ describe("empty spec", () => {
     cy.get("h1").contains("Connexion");
   });
 });
+
+export {};
