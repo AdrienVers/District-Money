@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import LogInIllustration from "../assets/loginform.png";
+import Link from "next/link";
 
 const LogInGlobal = styled.div`
   padding: 50px;
@@ -221,7 +222,9 @@ function LogIn() {
           >
             Se connecter
           </button>
-          <div>Pas encore de compte ? {"S'inscrire"}.</div>
+          <div>
+            Pas encore de compte ? <Link href="/signin">{"S'inscrire"}</Link>.
+          </div>
         </LogInForm>
         <LogInImage>
           <Image id="Image" src={LogInIllustration} alt="Connexion" />
