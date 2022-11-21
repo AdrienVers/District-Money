@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Logo from "../assets/logo.png";
+import Link from "next/link";
 
 const NavbarGlobal = styled.div`
   width: 100%;
@@ -16,11 +17,11 @@ const NavbarGlobal = styled.div`
   z-index: 99;
 
   #Image {
-    height: 80%;
+    height: 60px;
     width: auto;
 
     @media (max-width: 1100px) {
-      height: 70%;
+      height: 50px;
     }
   }
 
@@ -86,19 +87,33 @@ function Navbar() {
   return (
     <NavbarGlobal>
       {/* <i id="menuButton" className="fa-solid fa-bars"></i> */}
-      <Image id="Image" src={Logo} alt="logo" />
-      <p>Secteurs financiers</p>
-      <p>Bourse</p>
-      <p>Quizz</p>
-      <p>Lexique</p>
-      <button className="demoButton">
-        <span>Essayer la demo avec 500 € </span>
-        <i className="fa-solid fa-money-bill-trend-up"></i>
-      </button>
-      <button className="connexionButton">
-        <span>Me connecter </span>
-        <i className="fa-solid fa-user"></i>
-      </button>
+      <Link href="/">
+        <Image id="Image" src={Logo} alt="logo" />
+      </Link>
+      <Link href="/secteurs" legacyBehavior>
+        <a>Secteurs financiers</a>
+      </Link>
+      <Link href="/bourse" legacyBehavior>
+        <a>Bouse</a>
+      </Link>
+      <Link href="/quizz" legacyBehavior>
+        <a>Quizz</a>
+      </Link>
+      <Link href="/lexique" legacyBehavior>
+        <a>Lexique</a>
+      </Link>
+      <Link href="/signin">
+        <button className="demoButton">
+          <span>Commencer à investir </span>
+          <i className="fa-solid fa-money-bill-trend-up"></i>
+        </button>
+      </Link>
+      <Link href="/login">
+        <button className="connexionButton">
+          <span>Me connecter </span>
+          <i className="fa-solid fa-user"></i>
+        </button>
+      </Link>
     </NavbarGlobal>
   );
 }

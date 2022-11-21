@@ -5,7 +5,6 @@ import Image from "next/image";
 import LogInIllustration from "../assets/loginform.png";
 
 const LogInGlobal = styled.div`
-  width: 100%;
   padding: 50px;
   display: flex;
   align-items: center;
@@ -15,12 +14,17 @@ const LogInGlobal = styled.div`
     flex-direction: column;
     padding: 30px 20px;
   }
+
+  .LogInContainer {
+    background-color: dodgerblue;
+    width: 100%;
+    display: flex;
+  }
 `;
 
 const LogInForm = styled.form`
   width: 50%;
-  height: 550px;
-  padding: 20px 0px;
+  padding: 40px 0px;
   background-color: white;
   display: flex;
   align-items: center;
@@ -117,7 +121,6 @@ const LogInInputBox = styled.div<ErrorProps>`
 
 const LogInImage = styled.div`
   width: 50%;
-  height: 550px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,10 +147,6 @@ type FormValues = {
   password: string;
 };
 
-type SignInProps = {
-  login: any;
-};
-
 function LogIn() {
   const {
     register,
@@ -165,65 +164,69 @@ function LogIn() {
 
   return (
     <LogInGlobal>
-      <LogInForm onSubmit={onSubmit}>
-        <div className="titleBox">
-          <h1 className="formTitle">Connexion</h1>
-          <p className="formSubTitle">Accès à votre compte</p>
-        </div>
-        <LogInInputBox isError={errors.username}>
-          <input
-            type="text"
-            required
-            {...register("username", {
-              required: "Le champ « Nom » est requis.",
-              pattern: {
-                value: /^[a-zA-Z0-9]+$/,
-                message: "Le nom ne doit pas contenir de caractères spéciaux.",
-              },
-            })}
-            id="username"
-            name="username"
-          />
-          <label htmlFor="username">Nom</label>
-          {errors.username ? (
-            <p role="alert" style={{ color: "red" }}>
-              {errors.username.message}
-            </p>
-          ) : null}
-        </LogInInputBox>
-        <LogInInputBox isError={errors.password}>
-          <input
-            type="password"
-            required
-            {...register("password", {
-              required: "Le champ « Mot de passe » est requis.",
-              minLength: {
-                value: 8,
-                message: "Le mot de passe doit contenir au moins 8 caractères.",
-              },
-            })}
-            id="password"
-            name="password"
-          />
-          <label htmlFor="password">Mot de passe</label>
-          {errors.password && (
-            <p role="alert" style={{ color: "red" }}>
-              {errors.password.message}
-            </p>
-          )}
-        </LogInInputBox>
-        <button
-          className="submitButton"
-          type="submit"
-          disabled={!errors.password && !errors.username ? false : true}
-        >
-          Se connecter
-        </button>
-        <div>Pas encore de compte ? S`inscrire.</div>
-      </LogInForm>
-      <LogInImage>
-        <Image id="Image" src={LogInIllustration} alt="Connexion" />
-      </LogInImage>
+      <div className="LogInContainer">
+        <LogInForm onSubmit={onSubmit}>
+          <div className="titleBox">
+            <h1 className="formTitle">Connexion</h1>
+            <p className="formSubTitle">Accès à votre compte</p>
+          </div>
+          <LogInInputBox isError={errors.username}>
+            <input
+              type="text"
+              required
+              {...register("username", {
+                required: "Le champ « Nom » est requis.",
+                pattern: {
+                  value: /^[a-zA-Z0-9]+$/,
+                  message:
+                    "Le nom ne doit pas contenir de caractères spéciaux.",
+                },
+              })}
+              id="username"
+              name="username"
+            />
+            <label htmlFor="username">{"Nom d'utilisateur"}</label>
+            {errors.username ? (
+              <p role="alert" style={{ color: "red" }}>
+                {errors.username.message}
+              </p>
+            ) : null}
+          </LogInInputBox>
+          <LogInInputBox isError={errors.password}>
+            <input
+              type="password"
+              required
+              {...register("password", {
+                required: "Le champ « Mot de passe » est requis.",
+                minLength: {
+                  value: 8,
+                  message:
+                    "Le mot de passe doit contenir au moins 8 caractères.",
+                },
+              })}
+              id="password"
+              name="password"
+            />
+            <label htmlFor="password">Mot de passe</label>
+            {errors.password && (
+              <p role="alert" style={{ color: "red" }}>
+                {errors.password.message}
+              </p>
+            )}
+          </LogInInputBox>
+          <button
+            className="submitButton"
+            type="submit"
+            disabled={!errors.password && !errors.username ? false : true}
+          >
+            Se connecter
+          </button>
+          <div>Pas encore de compte ? {"S'inscrire"}.</div>
+        </LogInForm>
+        <LogInImage>
+          <Image id="Image" src={LogInIllustration} alt="Connexion" />
+        </LogInImage>
+      </div>
     </LogInGlobal>
   );
 }

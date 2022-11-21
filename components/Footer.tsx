@@ -14,6 +14,7 @@ const FooterGlobal = styled.div`
 
 function Footer() {
   return <FooterGlobal>District Money</FooterGlobal>;
+  // contact
 }
 
 export default Footer;
