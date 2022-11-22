@@ -39,7 +39,7 @@ const LogInForm = styled.form`
 
   @media (max-width: 900px) {
     width: 100%;
-    padding: 50px 0px 20px 0px;
+    padding: 30px 0px 20px 0px;
   }
 
   .titleBox {

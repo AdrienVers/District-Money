@@ -40,7 +40,7 @@ const SignInForm = styled.form`
   }
 
   @media (max-width: 900px) {
-    padding: 50px 0px 20px 0px;
+    padding: 30px 0px 20px 0px;
   }
 
   .titleBox {
@@ -144,7 +144,7 @@ const SignInImage = styled.div`
   #Image {
     width: 75%;
     height: auto;
-    max-width : 400px;
+    max-width: 400px;
   }
 `;
 
