@@ -3,6 +3,64 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import Logo from "../assets/logo.png";
 import Link from "next/link";
+import { NAVBAR_DATA } from "../datas/navbarData";
+
+type AnimationProps = {
+  isActive: boolean;
+};
+
+function Navbar() {
+  const [active, setActive] = useState(false);
+  console.log(active);
+
+  return (
+    <NavbarGlobal>
+      <i
+        id="menuButton"
+        className="fa-solid fa-bars"
+        onClick={() => setActive(!active)}
+      />
+      <Link href="/">
+        <Image id="Image" src={Logo} alt="logo" />
+      </Link>
+      <SidebarContent isActive={active}>
+        <div className="SidebarLinks">
+          {NAVBAR_DATA.map((item: any) => {
+            return (
+              <Link key={item.id} href={item.path} legacyBehavior>
+                <a onClick={() => setActive(!active)}>{item.name}</a>
+              </Link>
+            );
+          })}
+        </div>
+      </SidebarContent>
+      <SidebarBackground isActive={active} />
+      {NAVBAR_DATA.map((item: any) => {
+        return (
+          <Link key={item.id} href={item.path} legacyBehavior>
+            <a className="TextLink" onClick={() => setActive(!active)}>
+              {item.name}
+            </a>
+          </Link>
+        );
+      })}
+      <Link href="/signin">
+        <button className="demoButton">
+          <span>Commencer à investir </span>
+          <i className="fa-solid fa-money-bill-trend-up"></i>
+        </button>
+      </Link>
+      <Link href="/login">
+        <button className="connexionButton">
+          <span>Me connecter </span>
+          <i className="fa-solid fa-user"></i>
+        </button>
+      </Link>
+    </NavbarGlobal>
+  );
+}
+
+export default Navbar;
 
 const NavbarGlobal = styled.div`
   width: 100%;
@@ -104,7 +162,7 @@ const SidebarContent = styled.div<AnimationProps>`
     height: 100vh;
     width: 100%;
     left: 0;
-    transition: all 1.6s;
+    transition: all 1.4s;
     background-color: transparent;
     transform: ${({ isActive }) =>
       isActive ? "translateX(0)" : "translateX(-100%)"};
@@ -126,8 +184,9 @@ const SidebarContent = styled.div<AnimationProps>`
 `;
 
 const SidebarBackground = styled.div<AnimationProps>`
+  position: absolute;
+
   @media (max-width: 900px) {
-    position: absolute;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -142,68 +201,3 @@ const SidebarBackground = styled.div<AnimationProps>`
     z-index: 1;
   }
 `;
-
-type AnimationProps = {
-  isActive: boolean;
-};
-
-function Navbar() {
-  const [active, setActive] = useState(false);
-  console.log(active);
-
-  return (
-    <NavbarGlobal>
-      <i
-        id="menuButton"
-        className="fa-solid fa-bars"
-        onClick={() => setActive(!active)}
-      />
-      <Link href="/">
-        <Image id="Image" src={Logo} alt="logo" />
-      </Link>
-      <SidebarContent isActive={active}>
-        <div className="SidebarLinks">
-          <Link href="/secteurs" legacyBehavior>
-            <a onClick={() => setActive(!active)}>Secteurs financiers</a>
-          </Link>
-          <Link href="/bourse" legacyBehavior>
-            <a onClick={() => setActive(!active)}>{"S'initier à la Bouse"}</a>
-          </Link>
-          <Link href="/quizz" legacyBehavior>
-            <a onClick={() => setActive(!active)}>Quizz</a>
-          </Link>
-          <Link href="/lexique" legacyBehavior>
-            <a onClick={() => setActive(!active)}>Lexique</a>
-          </Link>
-        </div>
-      </SidebarContent>
-      <SidebarBackground isActive={active} />
-      <Link href="/secteurs" legacyBehavior>
-        <a className="TextLink">Secteurs financiers</a>
-      </Link>
-      <Link href="/bourse" legacyBehavior>
-        <a className="TextLink">{"S'initier à la Bouse"}</a>
-      </Link>
-      <Link href="/quizz" legacyBehavior>
-        <a className="TextLink">Quizz</a>
-      </Link>
-      <Link href="/lexique" legacyBehavior>
-        <a className="TextLink">Lexique</a>
-      </Link>
-      <Link href="/signin">
-        <button className="demoButton">
-          <span>Commencer à investir </span>
-          <i className="fa-solid fa-money-bill-trend-up"></i>
-        </button>
-      </Link>
-      <Link href="/login">
-        <button className="connexionButton">
-          <span>Me connecter </span>
-          <i className="fa-solid fa-user"></i>
-        </button>
-      </Link>
-    </NavbarGlobal>
-  );
-}
-
-export default Navbar;
