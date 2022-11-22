@@ -10,10 +10,18 @@ const HomeAboutGlobal = styled.div`
   display: flex;
   padding: 0px 50px 50px 50px;
 
+  @media (max-width: 900px) {
+    padding: 0px 20px 20px 20px;
+  }
+
   .HomeAboutContainer {
     width: 100%;
     display: flex;
     background-color: white;
+
+    @media (max-width: 1000px) {
+      flex-direction: column;
+    }
 
     .Invest {
       width: 25%;
@@ -23,9 +31,18 @@ const HomeAboutGlobal = styled.div`
       flex-direction: column;
       padding: 15px;
 
+      @media (max-width: 1000px) {
+        width: 100%;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
       #Image {
         width: 40%;
         height: auto;
+        max-width: 150px;
       }
     }
   }
@@ -56,11 +73,11 @@ function HomeAbout() {
           </p>
         </div>
         <div className="Invest">
-          <h2>Soutenir des entreprises</h2>
+          <h2>Soutenir une entreprise</h2>
           <Image id="Image" src={Entreprise} alt="Entreprise" />
           <p>
             {
-              "L'investissement n'est pas uniquement un acte pour soi, c'est aussi une démarche solidaire permettant de soutenir les entreprises dans leur développement."
+              "L'investissement n'est pas uniquement un acte pour soi, c'est aussi une démarche solidaire permettant de soutenir les entreprises dans leur développement, quelles soient GE, PME/ETI ou start-up."
             }
           </p>
         </div>
@@ -70,9 +87,8 @@ function HomeAbout() {
           <p>
             Nous nous sommes engagés à vous offrir un environnement sécurisé
             pour vos investissements. Notre système repose sur la protection de
-            vos données et de vos actifs. Notre servicde de paiement est
-            conforme à la régulation européenne DSP 2 et à{" "}
-            {"l'Autorité des marchés financiers (AMF)"}.
+            vos données et de vos actifs, conforme à la régulation européenne
+            DSP 2 et à {"l'Autorité des marchés financiers (AMF)"}.
           </p>
         </div>
       </div>

@@ -25,7 +25,7 @@ const NavbarGlobal = styled.div`
     }
   }
 
-  p {
+  .TextLink {
     @media (max-width: 900px) {
       display: none;
     }
@@ -91,16 +91,16 @@ function Navbar() {
         <Image id="Image" src={Logo} alt="logo" />
       </Link>
       <Link href="/secteurs" legacyBehavior>
-        <a>Secteurs financiers</a>
+        <a className="TextLink">Secteurs financiers</a>
       </Link>
       <Link href="/bourse" legacyBehavior>
-        <a>Bouse</a>
+        <a className="TextLink">Bouse</a>
       </Link>
       <Link href="/quizz" legacyBehavior>
-        <a>Quizz</a>
+        <a className="TextLink">Quizz</a>
       </Link>
       <Link href="/lexique" legacyBehavior>
-        <a>Lexique</a>
+        <a className="TextLink">Lexique</a>
       </Link>
       <Link href="/signin">
         <button className="demoButton">

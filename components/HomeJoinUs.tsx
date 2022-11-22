@@ -8,6 +8,10 @@ const HomeJoinUsGlobal = styled.div`
   display: flex;
   padding: 50px 50px 0px 50px;
 
+  @media (max-width: 900px) {
+    padding: 30px 20px 0px 20px;
+  }
+
   .HomeJoinUsContainer {
     width: 100%;
     display: flex;
@@ -19,9 +23,22 @@ const HomeJoinUsGlobal = styled.div`
       flex-direction: column;
       padding: 20px 30px;
 
+      @media (max-width: 1000px) {
+        width: 100%;
+        padding: 10px 20px;
+      }
+
       h1 {
         font-weight: normal;
         padding-right: 100px;
+
+        @media (max-width: 500px) {
+          padding: 0;
+        }
+
+        @media (max-width: 300px) {
+          font-size: 1.8rem;
+        }
       }
 
       p {
@@ -33,6 +50,14 @@ const HomeJoinUsGlobal = styled.div`
         display: flex;
         justify-content: space-evenly;
         width: 500px;
+
+        @media (max-width: 700px) {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          width: 100%;
+        }
 
         button {
           padding: 15px 20px;
@@ -61,6 +86,10 @@ const HomeJoinUsGlobal = styled.div`
       justify-content: center;
       align-items: center;
       padding: 20px;
+
+      @media (max-width: 1000px) {
+        display: none;
+      }
 
       #Image {
         width: 70%;
