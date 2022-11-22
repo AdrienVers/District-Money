@@ -87,8 +87,8 @@ function HomeAbout() {
           <p>
             Nous nous sommes engagés à vous offrir un environnement sécurisé
             pour vos investissements. Notre système repose sur la protection de
-            vos données et de vos actifs, conforme à la régulation européenne
-            DSP 2 et à {"l'Autorité des marchés financiers (AMF)"}.
+            vos données et de vos actifs, conformément à la régulation
+            européenne DSP 2 et à {"l'Autorité des marchés financiers"}.
           </p>
         </div>
       </div>

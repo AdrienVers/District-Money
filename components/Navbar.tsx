@@ -92,21 +92,22 @@ const NavbarGlobal = styled.div`
   }
 `;
 
-const Sidebar = styled.div<AnimationProps>`
-  position: absolute;
-  color: rgb(30, 50, 130);
-  top: 80px;
-  height: 100vh;
-  width: 100%;
-  left: 0;
-  transition: all 1.2s ease;
-  background-color: ${({ isActive }) =>
-    isActive ? "rgba(0, 0, 0, 0.5)" : "transparent"};
+const SidebarContent = styled.div<AnimationProps>`
   display: none;
+  z-index: 2;
 
   @media (max-width: 900px) {
     display: flex;
-    transform: translateX(0);
+    position: absolute;
+    color: rgb(30, 50, 130);
+    top: 80px;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    transition: all 1.6s;
+    background-color: transparent;
+    transform: ${({ isActive }) =>
+      isActive ? "translateX(0)" : "translateX(-100%)"};
   }
 
   .SidebarLinks {
@@ -117,13 +118,28 @@ const Sidebar = styled.div<AnimationProps>`
     padding: 30px 30px 40px 20px;
     width: 225px;
     height: 100%;
-    transition: all 1.2s ease;
-    transform: ${({ isActive }) =>
-      isActive ? "translateX(0)" : "translateX(-100%)"};
 
     @media (max-width: 900px) {
       display: flex;
     }
+  }
+`;
+
+const SidebarBackground = styled.div<AnimationProps>`
+  @media (max-width: 900px) {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    transition: background-color 1.2s ease-in-out;
+    background-color: ${({ isActive }) =>
+      isActive ? "rgba(0, 0, 0, 0.5)" : "transparent"};
+    transform: ${({ isActive }) =>
+      isActive ? "translateX(0)" : "translateX(-100%)"};
+    top: 80px;
+    left: 0px;
+    z-index: 1;
   }
 `;
 
@@ -145,7 +161,7 @@ function Navbar() {
       <Link href="/">
         <Image id="Image" src={Logo} alt="logo" />
       </Link>
-      <Sidebar isActive={active}>
+      <SidebarContent isActive={active}>
         <div className="SidebarLinks">
           <Link href="/secteurs" legacyBehavior>
             <a onClick={() => setActive(!active)}>Secteurs financiers</a>
@@ -160,7 +176,8 @@ function Navbar() {
             <a onClick={() => setActive(!active)}>Lexique</a>
           </Link>
         </div>
-      </Sidebar>
+      </SidebarContent>
+      <SidebarBackground isActive={active} />
       <Link href="/secteurs" legacyBehavior>
         <a className="TextLink">Secteurs financiers</a>
       </Link>
