@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Logo from "../assets/logo.png";
@@ -79,22 +79,93 @@ const NavbarGlobal = styled.div`
   }
 
   #menuButton {
+    display: none;
     font-size: 1.5rem;
+
+    @media (max-width: 900px) {
+      display: flex;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
+const Sidebar = styled.div<AnimationProps>`
+  position: absolute;
+  color: rgb(30, 50, 130);
+  top: 80px;
+  height: 100vh;
+  width: 100%;
+  left: 0;
+  transition: all 1.2s ease;
+  background-color: ${({ isActive }) =>
+    isActive ? "rgba(0, 0, 0, 0.5)" : "transparent"};
+  display: none;
+
+  @media (max-width: 900px) {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .SidebarLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    padding: 30px 30px 40px 20px;
+    width: 225px;
+    height: 100%;
+    transition: all 1.2s ease;
+    transform: ${({ isActive }) =>
+      isActive ? "translateX(0)" : "translateX(-100%)"};
+
+    @media (max-width: 900px) {
+      display: flex;
+    }
+  }
+`;
+
+type AnimationProps = {
+  isActive: boolean;
+};
+
 function Navbar() {
+  const [active, setActive] = useState(false);
+  console.log(active);
+
   return (
     <NavbarGlobal>
-      {/* <i id="menuButton" className="fa-solid fa-bars"></i> */}
+      <i
+        id="menuButton"
+        className="fa-solid fa-bars"
+        onClick={() => setActive(!active)}
+      />
       <Link href="/">
         <Image id="Image" src={Logo} alt="logo" />
       </Link>
+      <Sidebar isActive={active}>
+        <div className="SidebarLinks">
+          <Link href="/secteurs" legacyBehavior>
+            <a onClick={() => setActive(!active)}>Secteurs financiers</a>
+          </Link>
+          <Link href="/bourse" legacyBehavior>
+            <a onClick={() => setActive(!active)}>{"S'initier à la Bouse"}</a>
+          </Link>
+          <Link href="/quizz" legacyBehavior>
+            <a onClick={() => setActive(!active)}>Quizz</a>
+          </Link>
+          <Link href="/lexique" legacyBehavior>
+            <a onClick={() => setActive(!active)}>Lexique</a>
+          </Link>
+        </div>
+      </Sidebar>
       <Link href="/secteurs" legacyBehavior>
         <a className="TextLink">Secteurs financiers</a>
       </Link>
       <Link href="/bourse" legacyBehavior>
-        <a className="TextLink">Bouse</a>
+        <a className="TextLink">{"S'initier à la Bouse"}</a>
       </Link>
       <Link href="/quizz" legacyBehavior>
         <a className="TextLink">Quizz</a>
