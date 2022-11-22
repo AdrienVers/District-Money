@@ -67,9 +67,9 @@ function HomeAbout() {
           <Image id="Image" src={Actionnaire} alt="Actionnaire" />
           <p>
             Au travers des actions, vous devenez propriétaire {"d'une"} partie
-            {" de l'entreprise"} et obtenez un droit de vote à{" "}
-            {"l'Aassemblée Générale"} (en ligne et sans frais). Vous pouvez
-            ainsi maximiser vos investissements et percevoir des dividendes.
+            {" d'une entreprise"} et obtenez un droit de vote à{" "}
+            {"l'Assemblée Générale"} (en ligne et sans frais). Vous pouvez ainsi
+            maximiser vos investissements et percevoir des dividendes.
           </p>
         </div>
         <div className="Invest">

@@ -19,6 +19,10 @@ const SignInGlobal = styled.div`
     width: 100%;
     display: flex;
     background-color: white;
+
+    @media (max-width: 1000px) {
+      flex-direction: column;
+    }
   }
 `;
 
@@ -30,6 +34,10 @@ const SignInForm = styled.form`
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 
   @media (max-width: 900px) {
     padding: 50px 0px 20px 0px;
@@ -123,6 +131,10 @@ const SignInImage = styled.div`
   align-items: center;
   background-color: white;
 
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+
   @media (max-width: 900px) {
     width: 100%;
     height: 100%;
@@ -132,6 +144,7 @@ const SignInImage = styled.div`
   #Image {
     width: 75%;
     height: auto;
+    max-width : 400px;
   }
 `;
 

@@ -20,6 +20,10 @@ const LogInGlobal = styled.div`
     background-color: dodgerblue;
     width: 100%;
     display: flex;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+    }
   }
 `;
 
@@ -35,7 +39,6 @@ const LogInForm = styled.form`
 
   @media (max-width: 900px) {
     width: 100%;
-    height: 100%;
     padding: 50px 0px 20px 0px;
   }
 
@@ -136,6 +139,7 @@ const LogInImage = styled.div`
   #Image {
     width: 80%;
     height: auto;
+    max-width: 500px;
   }
 `;
 
