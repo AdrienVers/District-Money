@@ -15,21 +15,21 @@ const SimulationGlobal = styled.div`
   }
 
   @media (max-width: 600px) {
-    padding: 30px 15px;
+    padding: 20px 10px;
   }
 
   .SimulationContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, 100%);
-    grid-gap: 20px;
+    grid-gap: 10px;
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
-    padding: 30px;
+    padding: 10px 30px;
     background-color: white;
 
     @media (max-width: 600px) {
-      padding: 15px 10px;
+      padding: 0px 5px;
     }
   }
 `;

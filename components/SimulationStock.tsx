@@ -1,18 +1,26 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { STOCKS_DATA } from "../datas/stocksData";
+import { STOCKS_TITLE_DATA, STOCKS_DATA } from "../datas/stocksData";
 import Image from "next/image";
 
 const SimulationStockGlobal = styled.div`
   display: flex;
   flex-direction: column;
 
-  .SimulationStockItem {
+  h2 {
+    padding-left: 10px;
+    @media (max-width: 600px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  .SimulationStockItem,
+  .SimulationStockItemTitles {
     display: flex;
     width: 100%;
     margin: 5px 0px;
-    background-color: rgb(240, 240, 240);
     align-items: center;
+    text-align: center;
 
     .SimulationStockLogo {
       width: 18%;
@@ -37,7 +45,6 @@ const SimulationStockGlobal = styled.div`
       width: 20%;
       display: flex;
       justify-content: center;
-      text-align: center;
 
       @media (max-width: 800px) {
         width: 30%;
@@ -118,8 +125,8 @@ const SimulationStockGlobal = styled.div`
         padding: 6px 8px;
         font-size: 1rem;
         color: white;
-        border : none;
-        box-shadow : inset 0px 0px 0px 0.5px black;
+        border: none;
+        box-shadow: inset 0px 0px 0px 0.5px black;
 
         @media (max-width: 600px) {
           padding: 2px 5px;
@@ -150,11 +157,38 @@ const SimulationStockGlobal = styled.div`
       }
     }
   }
+
+  .SimulationStockItem {
+    background-color: rgb(240, 240, 240);
+
+    &:nth-of-type(odd) {
+      background-color: rgba(185, 225, 245, 0.5);
+    }
+  }
+
+  .SimulationStockItemTitles {
+    padding: 5px;
+    background-color: rgb(10, 20, 100);
+    color: white;
+  }
 `;
 
 function SimulationStock() {
   return (
     <SimulationStockGlobal>
+      <h2>Marché boursier en temps réel :</h2>
+      {STOCKS_TITLE_DATA.map((item) => {
+        return (
+          <div key={item.id} className="SimulationStockItemTitles">
+            <div className="SimulationStockLogo">{item.img}</div>
+            <div className="SimulationStockTitle">{item.name}</div>
+            <div className="SimulationStockValue">{item.value}</div>
+            <div className="SimulationStockMarket">{item.market}</div>
+            <div className="SimulationStockSector">{item.sector}</div>
+            <div className="SimulationStockButtons">Achat / Vente</div>
+          </div>
+        );
+      })}
       {STOCKS_DATA.map((item) => {
         return (
           <div key={item.id} className="SimulationStockItem">

@@ -33,7 +33,7 @@ const SignInForm = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 
   @media (max-width: 1000px) {
     width: 100%;

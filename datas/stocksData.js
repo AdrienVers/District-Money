@@ -3,11 +3,17 @@ import SanofiLogo from "../assets/SanofiLogo.png";
 import TelekomLogo from "../assets/TelekomLogo.png";
 import UnileverLogo from "../assets/UnileverLogo.png";
 import RepsolLogo from "../assets/RepsolLogo.png";
-import Industrie from "../assets/Industrie.png";
-import Sante from "../assets/Sante.png";
-import Telecom from "../assets/Telecom.png";
-import NonCyclique from "../assets/NonCyclique.png";
-import Energie from "../assets/Energie.png";
+
+export const STOCKS_TITLE_DATA = [
+  {
+    id: 1,
+    img: "Logotype",
+    name: "Nom de l'entreprise",
+    market: "Marché boursier",
+    value: "Valeur",
+    sector: "Secteur",
+  },
+];
 
 export const STOCKS_DATA = [
   {
@@ -17,7 +23,6 @@ export const STOCKS_DATA = [
     market: "EURONEXT PARIS",
     value: 114,
     sector: "Industrie",
-    sectorImg: Industrie,
   },
   {
     id: 2,
@@ -26,7 +31,6 @@ export const STOCKS_DATA = [
     market: "EURONEXT PARIS",
     value: 87,
     sector: "Santé",
-    sectorImg: Sante,
   },
   {
     id: 3,
@@ -35,7 +39,6 @@ export const STOCKS_DATA = [
     market: "DEUTSCHE BOERSE AG",
     value: 19,
     sector: "Télécom",
-    sectorImg: Telecom,
   },
   {
     id: 4,
@@ -44,7 +47,6 @@ export const STOCKS_DATA = [
     market: "LONDON STOCK EXCHANGE",
     value: 410,
     sector: "Consommation",
-    sectorImg: NonCyclique,
   },
   {
     id: 5,
@@ -53,6 +55,5 @@ export const STOCKS_DATA = [
     market: "BOLSA DE MADRID",
     value: 14,
     sector: "Énergie",
-    sectorImg: Energie,
   },
 ];

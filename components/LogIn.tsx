@@ -35,7 +35,7 @@ const LogInForm = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px;
 
   @media (max-width: 900px) {
     width: 100%;
@@ -133,7 +133,7 @@ const LogInImage = styled.div`
   @media (max-width: 900px) {
     width: 100%;
     height: 100%;
-    padding: 25px 0px 40px 0px;
+    padding: 30px 0px 40px 0px;
   }
 
   #Image {
