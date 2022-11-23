@@ -14,6 +14,10 @@ const SimulationGlobal = styled.div`
     padding: 30px 20px;
   }
 
+  @media (max-width: 600px) {
+    padding: 30px 15px;
+  }
+
   .SimulationContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, 100%);
@@ -23,6 +27,10 @@ const SimulationGlobal = styled.div`
     align-items: center;
     padding: 30px;
     background-color: white;
+
+    @media (max-width: 600px) {
+      padding: 15px 10px;
+    }
   }
 `;
 

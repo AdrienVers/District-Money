@@ -15,36 +15,139 @@ const SimulationStockGlobal = styled.div`
     align-items: center;
 
     .SimulationStockLogo {
-      width: 10%;
+      width: 18%;
+      display: flex;
+      justify-content: center;
+
+      @media (max-width: 800px) {
+        width: 20%;
+      }
+
+      @media (max-width: 600px) {
+        display: none;
+      }
 
       #Logo {
-        width: 100%;
+        width: 50%;
         height: auto;
       }
     }
 
     .SimulationStockTitle {
-      width: 25%;
+      width: 20%;
       display: flex;
       justify-content: center;
+      text-align: center;
+
+      @media (max-width: 800px) {
+        width: 30%;
+      }
+
+      @media (max-width: 300px) {
+        font-size: 0.8rem;
+      }
     }
 
     .SimulationStockValue {
       width: 10%;
+      display: flex;
+      justify-content: center;
+
+      @media (max-width: 1100px) {
+        width: 15%;
+      }
+
+      @media (max-width: 800px) {
+        width: 20%;
+      }
+
+      @media (max-width: 600px) {
+        width: 25%;
+      }
+
+      @media (max-width: 300px) {
+        font-size: 0.8rem;
+      }
     }
 
     .SimulationStockMarket {
-      width: 20%;
+      width: 22%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      @media (max-width: 1100px) {
+        width: 25%;
+      }
+
+      @media (max-width: 800px) {
+        display: none;
+      }
     }
 
     .SimulationStockSector {
-      width: 20%;
+      width: 15%;
+      display: flex;
+      justify-content: center;
+      padding: 0px 5px;
+
+      @media (max-width: 1100px) {
+        display: none;
+      }
     }
 
     .SimulationStockButtons {
       width: 15%;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+
+      @media (max-width: 1100px) {
+        width: 20%;
+      }
+
+      @media (max-width: 800px) {
+        width: 30%;
+      }
+
+      @media (max-width: 600px) {
+        width: 45%;
+      }
+
+      button {
+        padding: 6px 8px;
+        font-size: 1rem;
+        color: white;
+        border : none;
+        box-shadow : inset 0px 0px 0px 0.5px black;
+
+        @media (max-width: 600px) {
+          padding: 2px 5px;
+        }
+
+        @media (max-width: 300px) {
+          padding: 1px;
+          font-size: 0.8rem;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .BuyButton {
+        background-color: rgb(0, 170, 0);
+        margin-right: 10px;
+
+        @media (max-width: 600px) {
+          margin-right: 0px;
+        }
+      }
+
+      .SellButton {
+        background-color: rgb(240, 30, 60);
+        margin-left: 10px;
+      }
     }
   }
 `;
@@ -63,8 +166,8 @@ function SimulationStock() {
             <div className="SimulationStockMarket">{item.market}</div>
             <div className="SimulationStockSector">{item.sector}</div>
             <div className="SimulationStockButtons">
-              <button>Acheter</button>
-              <button>Vendre</button>
+              <button className="BuyButton">Achat</button>
+              <button className="SellButton">Vente</button>
             </div>
           </div>
         );
