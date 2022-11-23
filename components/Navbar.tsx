@@ -15,11 +15,20 @@ function Navbar() {
 
   return (
     <NavbarGlobal>
-      <i
-        id="menuButton"
-        className="fa-solid fa-bars"
-        onClick={() => setActive(!active)}
-      />
+      {active ? (
+        <i
+          id="menuButton"
+          className="fa-solid fa-xmark"
+          onClick={() => setActive(!active)}
+        />
+      ) : (
+        <i
+          id="menuButton"
+          className="fa-solid fa-bars"
+          onClick={() => setActive(!active)}
+        />
+      )}
+
       <Link href="/">
         <Image id="Image" src={Logo} alt="logo" />
       </Link>
@@ -38,9 +47,7 @@ function Navbar() {
       {NAVBAR_DATA.map((item: any) => {
         return (
           <Link key={item.id} href={item.path} legacyBehavior>
-            <a className="TextLink" onClick={() => setActive(!active)}>
-              {item.name}
-            </a>
+            <a className="TextLink">{item.name}</a>
           </Link>
         );
       })}
