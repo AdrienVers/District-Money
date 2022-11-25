@@ -2,6 +2,59 @@ import React from "react";
 import styled from "@emotion/styled";
 import { STOCKS_TITLE_DATA, STOCKS_DATA } from "../datas/stocksData";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { incrementStockQuantity, decrementStockQuantity } from "../store";
+
+function SimulationStock() {
+  const dispatch = useDispatch();
+
+  return (
+    <SimulationStockGlobal>
+      <h2>Marché boursier en temps réel :</h2>
+      {STOCKS_TITLE_DATA.map((item) => {
+        return (
+          <div key={item.id} className="SimulationStockItemTitles">
+            <div className="SimulationStockLogo">{item.img}</div>
+            <div className="SimulationStockTitle">{item.name}</div>
+            <div className="SimulationStockValue">{item.value}</div>
+            <div className="SimulationStockMarket">{item.market}</div>
+            <div className="SimulationStockSector">{item.sector}</div>
+            <div className="SimulationStockButtons">Achat / Vente</div>
+          </div>
+        );
+      })}
+      {STOCKS_DATA.map((item) => {
+        return (
+          <div key={item.id} className="SimulationStockItem">
+            <div className="SimulationStockLogo">
+              <Image id="Logo" src={item.img} alt={item.name} />
+            </div>
+            <div className="SimulationStockTitle">{item.name}</div>
+            <div className="SimulationStockValue">{item.value} EUR</div>
+            <div className="SimulationStockMarket">{item.market}</div>
+            <div className="SimulationStockSector">{item.sector}</div>
+            <div className="SimulationStockButtons">
+              <button
+                className="BuyButton"
+                onClick={() => dispatch(incrementStockQuantity())}
+              >
+                Achat
+              </button>
+              <button
+                className="SellButton"
+                onClick={() => dispatch(decrementStockQuantity())}
+              >
+                Vente
+              </button>
+            </div>
+          </div>
+        );
+      })}
+    </SimulationStockGlobal>
+  );
+}
+
+export default SimulationStock;
 
 const SimulationStockGlobal = styled.div`
   display: flex;
@@ -172,42 +225,3 @@ const SimulationStockGlobal = styled.div`
     color: white;
   }
 `;
-
-function SimulationStock() {
-  return (
-    <SimulationStockGlobal>
-      <h2>Marché boursier en temps réel :</h2>
-      {STOCKS_TITLE_DATA.map((item) => {
-        return (
-          <div key={item.id} className="SimulationStockItemTitles">
-            <div className="SimulationStockLogo">{item.img}</div>
-            <div className="SimulationStockTitle">{item.name}</div>
-            <div className="SimulationStockValue">{item.value}</div>
-            <div className="SimulationStockMarket">{item.market}</div>
-            <div className="SimulationStockSector">{item.sector}</div>
-            <div className="SimulationStockButtons">Achat / Vente</div>
-          </div>
-        );
-      })}
-      {STOCKS_DATA.map((item) => {
-        return (
-          <div key={item.id} className="SimulationStockItem">
-            <div className="SimulationStockLogo">
-              <Image id="Logo" src={item.img} alt={item.name} />
-            </div>
-            <div className="SimulationStockTitle">{item.name}</div>
-            <div className="SimulationStockValue">{item.value} EUR</div>
-            <div className="SimulationStockMarket">{item.market}</div>
-            <div className="SimulationStockSector">{item.sector}</div>
-            <div className="SimulationStockButtons">
-              <button className="BuyButton">Achat</button>
-              <button className="SellButton">Vente</button>
-            </div>
-          </div>
-        );
-      })}
-    </SimulationStockGlobal>
-  );
-}
-
-export default SimulationStock;

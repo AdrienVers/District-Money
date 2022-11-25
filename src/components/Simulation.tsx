@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import SimulationStock from "../components/SimulationStock";
+import SimulationStock from "./SimulationStock";
 import SimulationBasket from "./SimulationBasket";
 
 const SimulationGlobal = styled.div`

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
-import LogInIllustration from "../assets/signinform.jpg";
+import LogInIllustration from "../assets/loginform.png";
+import Link from "next/link";
 
-const SignInGlobal = styled.div`
+const LogInGlobal = styled.div`
   padding: 50px;
   display: flex;
   align-items: center;
@@ -15,31 +16,29 @@ const SignInGlobal = styled.div`
     padding: 30px 20px;
   }
 
-  .SignInContainer {
+  .LogInContainer {
+    background-color: dodgerblue;
     width: 100%;
     display: flex;
-    background-color: white;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 900px) {
       flex-direction: column;
     }
   }
 `;
 
-const SignInForm = styled.form`
+const LogInForm = styled.form`
   width: 50%;
   padding: 40px 0px;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 18px;
-
-  @media (max-width: 1000px) {
-    width: 100%;
-  }
+  gap: 30px;
 
   @media (max-width: 900px) {
+    width: 100%;
     padding: 30px 0px 20px 0px;
   }
 
@@ -59,14 +58,14 @@ const SignInForm = styled.form`
     .formSubTitle {
       font-size: 1.3rem;
       margin: 0;
-      padding: 8px 0px 10px 0px;
+      padding: 10px 0px 15px 0px;
       color: rgb(120, 120, 120);
     }
   }
 
   .submitButton {
     margin-top: 10px;
-    width: 105px;
+    width: 125px;
     font-size: 1.05rem;
     padding: 6px 0px;
 
@@ -80,11 +79,11 @@ const SignInForm = styled.form`
   }
 `;
 
-const SignInInputBox = styled.div<ErrorProps>`
+const LogInInputBox = styled.div<ErrorProps>`
   position: relative;
-  width: 400px;
+  width: 250px;
 
-  @media (max-width: 450px) {
+  @media (max-width: 330px) {
     width: 200px;
   }
 
@@ -122,29 +121,35 @@ const SignInInputBox = styled.div<ErrorProps>`
   p {
     margin: 5px 0px 0px 0px;
   }
+
+  #passwordVisible {
+    position: absolute;
+    top: 18px;
+    right: 12px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
-const SignInImage = styled.div`
+const LogInImage = styled.div`
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
 
-  @media (max-width: 1000px) {
-    width: 100%;
-  }
-
   @media (max-width: 900px) {
     width: 100%;
     height: 100%;
-    padding: 25px 0px 40px 0px;
+    padding: 30px 0px 40px 0px;
   }
 
   #Image {
-    width: 75%;
+    width: 80%;
     height: auto;
-    max-width: 400px;
+    max-width: 500px;
   }
 `;
 
@@ -154,11 +159,12 @@ type ErrorProps = {
 
 type FormValues = {
   username: string;
-  email: string;
   password: string;
 };
 
-function SignIn() {
+function LogIn() {
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -174,19 +180,19 @@ function SignIn() {
   });
 
   return (
-    <SignInGlobal>
-      <div className="SignInContainer">
-        <SignInForm onSubmit={onSubmit}>
+    <LogInGlobal>
+      <div className="LogInContainer">
+        <LogInForm onSubmit={onSubmit}>
           <div className="titleBox">
-            <h1 className="formTitle">Inscription</h1>
-            <p className="formSubTitle">Création de votre compte</p>
+            <h1 className="formTitle">Connexion</h1>
+            <p className="formSubTitle">Accès à votre compte</p>
           </div>
-          <SignInInputBox isError={errors.username}>
+          <LogInInputBox isError={errors.username}>
             <input
               type="text"
               required
               {...register("username", {
-                required: "Le champ « Nom d'utilisateur » est requis.",
+                required: "Le champ « Nom » est requis.",
                 pattern: {
                   value: /^[a-zA-Z0-9]+$/,
                   message:
@@ -202,32 +208,10 @@ function SignIn() {
                 {errors.username.message}
               </p>
             ) : null}
-          </SignInInputBox>
-          <SignInInputBox isError={errors.email}>
+          </LogInInputBox>
+          <LogInInputBox isError={errors.password}>
             <input
-              type="text"
-              required
-              {...register("email", {
-                required: "Le champ « Adresse e-mail » est requis.",
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message:
-                    "L'e-mail doit avoir un format valide de type : abc@exemple.com",
-                },
-              })}
-              id="email"
-              name="email"
-            />
-            <label htmlFor="email">Adresse e-mail</label>
-            {errors.email ? (
-              <p role="alert" style={{ color: "red" }}>
-                {errors.email.message}
-              </p>
-            ) : null}
-          </SignInInputBox>
-          <SignInInputBox isError={errors.password}>
-            <input
-              type="password"
+              type={passwordVisible ? "text" : "password"}
               required
               {...register("password", {
                 required: "Le champ « Mot de passe » est requis.",
@@ -241,72 +225,42 @@ function SignIn() {
               name="password"
             />
             <label htmlFor="password">Mot de passe</label>
+            {passwordVisible ? (
+              <i
+                id="passwordVisible"
+                className="fa-solid fa-eye"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              />
+            ) : (
+              <i
+                id="passwordVisible"
+                className="fa-solid fa-eye-slash"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              />
+            )}
             {errors.password && (
               <p role="alert" style={{ color: "red" }}>
                 {errors.password.message}
               </p>
             )}
-          </SignInInputBox>
-          <SignInInputBox isError={errors.password}>
-            <input
-              type="password"
-              required
-              {...register("password", {
-                required: "Le champ « Mot de passe » est requis.",
-                minLength: {
-                  value: 8,
-                  message:
-                    "Le mot de passe doit contenir au moins 8 caractères.",
-                },
-              })}
-              id="password"
-              name="password"
-            />
-            <label htmlFor="password">Confirmation</label>
-            {errors.password && (
-              <p role="alert" style={{ color: "red" }}>
-                {errors.password.message}
-              </p>
-            )}
-          </SignInInputBox>
+          </LogInInputBox>
           <button
             className="submitButton"
             type="submit"
-            disabled={
-              !errors.password && !errors.username && !errors.email
-                ? false
-                : true
-            }
+            disabled={!errors.password && !errors.username ? false : true}
           >
-            {"S'inscrire"}
+            Se connecter
           </button>
-        </SignInForm>
-        <SignInImage>
+          <div>
+            Pas encore de compte ? <Link href="/signin">{"S'inscrire"}</Link>.
+          </div>
+        </LogInForm>
+        <LogInImage>
           <Image id="Image" src={LogInIllustration} alt="Connexion" />
-        </SignInImage>
+        </LogInImage>
       </div>
-    </SignInGlobal>
+    </LogInGlobal>
   );
 }
 
-export default SignIn;
-
-/*
-test("When we click on submit button", () => {
-  const mockSubmission = jest.fn();
-  render(<Account submission={mockSubmission} />);
-  const emailInput = screen.getByLabelText(/Email/i);
-  userEvent.type(emailInput, "test@example.org");
-  const passwordInput = screen.getByLabelText(/Mot de passe/i);
-  userEvent.type(passwordInput, "password");
-  const submitButton = screen.getByRole("button", {
-    name: /Se connecter/i,
-  });
-  fireEvent.click(submitButton);
-  expect(mockSubmission.mock.calls.length).toBe(1);
-  expect(mockSubmission.mock.calls[0][0]).toEqual({
-    email: "test@example.org",
-    password: "password",
-  });
-});
-*/
+export default LogIn;
