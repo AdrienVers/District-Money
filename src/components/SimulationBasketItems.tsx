@@ -1,31 +1,28 @@
-import Image from "next/image";
 import React from "react";
 
 interface SimulationBasketItemsProps {
-  id: number;
+  id: string;
   name: string;
-  quantity: number;
-  value: number;
-  nextValue: number;
+  price: number;
+  nextPrice : number;
+  count: number;
 }
 
 function SimulationBasketItems({
   id,
   name,
-  quantity,
-  value,
-  nextValue,
+  price,
+  nextPrice,
+  count,
 }: SimulationBasketItemsProps) {
   return (
     <div className="SimulationBasketItem">
       <div className="SimulationBasketTitle">{name}</div>
-      <div className="SimulationBasketQuantity">{quantity}</div>
-      <div className="SimulationBasketInitialPrice">{value} EUR</div>
-      <div className="SimulationBasketRate">{nextValue} EUR</div>
-      <div className="SimulationBasketValue">{nextValue * quantity} EUR</div>
-      <div className="SimulationBasketGain">
-        {nextValue * quantity - value * quantity} EUR
-      </div>
+      <div className="SimulationBasketQuantity">{count}</div>
+      <div className="SimulationBasketInitialPrice">{price} EUR</div>
+      <div className="SimulationBasketRate">{nextPrice} EUR</div>
+      <div className="SimulationBasketValue">{nextPrice * count} EUR</div>
+      <div className="SimulationBasketGain">{(nextPrice * count) - (price * count)} EUR</div>
     </div>
   );
 }

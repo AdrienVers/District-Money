@@ -53,7 +53,7 @@ export const STOCKS_DATA = [
     market: "LONDON STOCK EXCHANGE",
     value: 410,
     nextValue: 400,
-    sector: "Consommation",
+    sector: "Consommation de base",
     quantity: 0,
   },
   {

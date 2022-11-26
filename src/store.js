@@ -1,3 +1,4 @@
+/*
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -36,6 +37,8 @@ export const store = configureStore({
 });
 
 export const quantityValue = (state) => state.basket.items;
+*/
+
 
 //export type RootState = ReturnType<typeof store.getState>;
 
