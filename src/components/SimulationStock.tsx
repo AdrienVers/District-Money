@@ -1,20 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { STOCKS_TITLE_DATA, STOCKS_DATA } from "../datas/stocksData";
-import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { incrementStockQuantity, decrementStockQuantity } from "../store";
+import SimulationItem from "./SimulationStockItems";
 
 function SimulationStock() {
-  const dispatch = useDispatch();
-
   return (
     <SimulationStockGlobal>
       <h2>Marché boursier en temps réel :</h2>
       {STOCKS_TITLE_DATA.map((item) => {
         return (
           <div key={item.id} className="SimulationStockItemTitles">
-            <div className="SimulationStockLogo">{item.img}</div>
+            <div className="SimulationStockLogo">{item.logo}</div>
             <div className="SimulationStockTitle">{item.name}</div>
             <div className="SimulationStockValue">{item.value}</div>
             <div className="SimulationStockMarket">{item.market}</div>
@@ -25,29 +21,17 @@ function SimulationStock() {
       })}
       {STOCKS_DATA.map((item) => {
         return (
-          <div key={item.id} className="SimulationStockItem">
-            <div className="SimulationStockLogo">
-              <Image id="Logo" src={item.img} alt={item.name} />
-            </div>
-            <div className="SimulationStockTitle">{item.name}</div>
-            <div className="SimulationStockValue">{item.value} EUR</div>
-            <div className="SimulationStockMarket">{item.market}</div>
-            <div className="SimulationStockSector">{item.sector}</div>
-            <div className="SimulationStockButtons">
-              <button
-                className="BuyButton"
-                onClick={() => dispatch(incrementStockQuantity())}
-              >
-                Achat
-              </button>
-              <button
-                className="SellButton"
-                onClick={() => dispatch(decrementStockQuantity())}
-              >
-                Vente
-              </button>
-            </div>
-          </div>
+          <SimulationItem
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            logo={item.logo}
+            value={item.value}
+            nextValue={item.nextValue}
+            sector={item.sector}
+            market={item.market}
+            quantity={item.quantity}
+          />
         );
       })}
     </SimulationStockGlobal>

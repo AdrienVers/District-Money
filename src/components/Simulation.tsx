@@ -3,6 +3,34 @@ import styled from "@emotion/styled";
 import SimulationStock from "./SimulationStock";
 import SimulationBasket from "./SimulationBasket";
 
+function Simulation() {
+  return (
+    <SimulationGlobal>
+      <div className="SimulationContainer">
+        <SimulationStock />
+        <SimulationBasket />
+      </div>
+    </SimulationGlobal>
+  );
+}
+
+export default Simulation;
+
+/*
+    const currentStock = Object.values(stock);
+    let alreadyInBasket = false;
+    currentStock.forEach((item) => {
+      if (item.id === id) {
+        quantity += quantity;
+        alreadyInBasket = true;
+      }
+    });
+    if (!alreadyInBasket) {
+      dispatch(addToBasket(stock));
+    }
+  }
+  */
+
 const SimulationGlobal = styled.div`
   padding: 50px;
   display: flex;
@@ -33,16 +61,3 @@ const SimulationGlobal = styled.div`
     }
   }
 `;
-
-function Simulation() {
-  return (
-    <SimulationGlobal>
-      <div className="SimulationContainer">
-        <SimulationStock />
-        <SimulationBasket />
-      </div>
-    </SimulationGlobal>
-  );
-}
-
-export default Simulation;

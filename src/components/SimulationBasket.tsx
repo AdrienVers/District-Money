@@ -3,13 +3,25 @@ import styled from "@emotion/styled";
 import { BASKET_TITLE_DATA, BASKET_DATA } from "../datas/basketData";
 import { useSelector } from "react-redux";
 import { quantityValue } from "../store";
+import SimulationBasketItems from "./SimulationBasketItems";
 
 function SimulationBasket() {
-  const count = useSelector(quantityValue);
+  const items = useSelector(quantityValue);
 
   return (
     <SimulationBasketGlobal>
-      <h2>Portefeuille en temps réel : </h2>
+      <h2 style={{ margin: "2px" }}>Portefeuille en temps réel : </h2>
+      <p>
+        {items.length !== 0
+          ? `Vous êtes actionnaire de ${
+              items.length > 1
+                ? `${items.length} entreprises.`
+                : `${items.length} entreprise.`
+            }`
+          : `Vous n'êtes pas encore actionnaire, pour le devenir commencez à acheter des actions. `}
+        Votre solde est de <strong>500 EUR en espèce</strong> et de{" "}
+        <strong>40 EUR en actif</strong>.
+      </p>
       {BASKET_TITLE_DATA.map((item) => {
         return (
           <div key={item.id} className="SimulationBasketItemTitles">
@@ -24,21 +36,19 @@ function SimulationBasket() {
           </div>
         );
       })}
-      {BASKET_DATA.map((item) => {
+
+      {items.map((item: any) => {
         return (
-          <div key={item.id} className="SimulationBasketItem">
-            <div className="SimulationBasketTitle">{item.label}</div>
-            <div className="SimulationBasketQuantity">{item.quantity}</div>
-            <div className="SimulationBasketInitialPrice">
-              {item.initialPrice} EUR
-            </div>
-            <div className="SimulationBasketRate">{item.rate} EUR</div>
-            <div className="SimulationBasketValue">{item.value} EUR</div>
-            <div className="SimulationBasketGain">{item.gain} EUR</div>
-          </div>
+          <SimulationBasketItems
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            quantity={item.quantity}
+            value={item.value}
+            nextValue={item.nextValue}
+          />
         );
       })}
-      <p>Ici : {count}</p>
     </SimulationBasketGlobal>
   );
 }
