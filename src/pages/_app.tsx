@@ -4,8 +4,6 @@ import Navbar from "../components/Navbar";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
 // import Footer from "../components/Footer";
-//import { Provider } from 'react-redux'
-//import { store } from '../store'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
