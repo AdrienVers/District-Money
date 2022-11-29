@@ -1,3 +1,101 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const productsApi = createApi({
+  reducerPath: "productsApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://district-money-backend.vercel.app/",
+  }),
+  endpoints: (builder) => ({
+    getAllProducts: builder.query({
+      query: () => ``,
+    }),
+  }),
+});
+
+export const { useGetAllProductsQuery } = productsApi;
+
+export type Stock = {
+  id: string;
+  name: string;
+  price: number;
+  nextPrice : number;
+  logo : string;
+  market : string;
+  sector : string;
+};
+
+export enum Status {
+  LOADING = "loading",
+  SUCCESS = "completed",
+  ERROR = "error",
+}
+
+export interface StockSliceState {
+  items: Stock[];
+  status: Status;
+}
+
+const initialState: StockSliceState = {
+  items: [],
+  //status: null,
+  status: Status.LOADING,
+};
+
+export const productsFetch = createAsyncThunk(
+  "products/productsFetch",
+  async () => {
+    try {
+      const response = await axios.get(
+        "https://district-money-backend.vercel.app/"
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+const productsSlice = createSlice({
+  name: "products",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(productsFetch.pending, (state, action) => {
+      state.status = Status.LOADING;
+      state.items = [];
+    });
+    builder.addCase(productsFetch.fulfilled, (state, action) => {
+      state.items = action.payload;
+      state.status = Status.SUCCESS;
+    });
+
+    builder.addCase(productsFetch.rejected, (state, action) => {
+      state.status = Status.ERROR;
+      state.items = [];
+    });
+  },
+
+  /*
+  extraReducers: {
+    [productsFetch.pending]: (state, action) => {
+      state.status = "pending";
+    },
+    [productsFetch.fulfilled]: (state, action) => {
+      state.items = action.payload;
+      state.status = "success";
+    },
+    [productsFetch.rejected]: (state, action) => {
+      state.status = "rejected";
+    },
+  },
+  */
+});
+
+export default productsSlice.reducer;
+
+/*
 import { RootState } from './store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -90,5 +188,4 @@ const stockSlice = createSlice({
 export const { setItems } = stockSlice.actions;
 
 export default stockSlice.reducer;
-
-
+*/

@@ -1,6 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
 
+function Footer() {
+  return <FooterGlobal>District Money</FooterGlobal>;
+  // contact
+}
+
+export default Footer;
+
 const FooterGlobal = styled.div`
   width: 100%;
   height: 80px;
@@ -12,9 +19,3 @@ const FooterGlobal = styled.div`
   bottom: 0;
 `;
 
-function Footer() {
-  return <FooterGlobal>District Money</FooterGlobal>;
-  // contact
-}
-
-export default Footer;

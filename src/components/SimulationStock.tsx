@@ -1,70 +1,12 @@
-/*
-import React from "react";
-import axios from "axios";
-import Image from "next/image";
-
-interface StocksProps {
-  map(arg0: (item: any) => JSX.Element): React.ReactNode;
-  id: Number;
-  title: String;
-  imageUrl: HTMLImageElement;
-  price: Number;
-}
-
-const Stocks: React.FC = () => {
-  const [stock, setStock] = React.useState<StocksProps>();
-
-  React.useEffect(() => {
-    async function fetchStock() {
-      try {
-        const { data } = await axios.get(
-          "https://district-money-backend.vercel.app/"
-        );
-        setStock(data);
-      } catch (error) {
-        alert("Impossible de récupérer les données du serveur.");
-      }
-    }
-
-    fetchStock();
-  }, []);
-
-  if (!stock) {
-    return <>Loading...</>;
-  }
-
-  return (
-    <div>
-      {stock.map((item) => {
-        return (
-          <div key={item.id}>
-            <Image
-              src={item.imageUrl}
-              width="200"
-              height="65"
-              alt={item.title}
-            />
-            <h2>{item.title}</h2>
-            <h4>{item.price} EUR</h4>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-export default Stocks;
-*/
-
 import React from "react";
 import styled from "@emotion/styled";
 import { STOCKS_TITLE_DATA, STOCKS_DATA } from "../datas/stocksData";
-import SimulationItem from "./SimulationStockItems";
 import axios from "axios";
+import SimulationStockItems from "./SimulationStockItems";
 
 interface StocksProps {
   map(arg0: (item: any) => JSX.Element): React.ReactNode;
-  id: Number;
+  id: string;
   name: String;
   logo: HTMLImageElement;
   price: Number;
@@ -74,6 +16,7 @@ interface StocksProps {
 }
 
 function SimulationStock() {
+
   const [stock, setStock] = React.useState<StocksProps>();
 
   React.useEffect(() => {
@@ -97,7 +40,9 @@ function SimulationStock() {
 
   return (
     <SimulationStockGlobal>
-      <h2>Marché boursier en temps réel :</h2>
+      <h2 style={{ margin: "5px 0px 10px 0px" }}>
+        Marché boursier en temps réel :
+      </h2>
       {STOCKS_TITLE_DATA.map((item) => {
         return (
           <div key={item.id} className="SimulationStockItemTitles">
@@ -110,21 +55,20 @@ function SimulationStock() {
           </div>
         );
       })}
-      {stock.map((item) => {
-        return (
-          <SimulationItem
+      {stock &&
+        stock?.map((item) => (
+          <SimulationStockItems
             key={item.id}
             id={item.id}
-            name={item.name}
             logo={item.logo}
-            price={item.price}
+            name={item.name}
             nextPrice={item.nextPrice}
-            sector={item.sector}
+            price={item.price}
             market={item.market}
-            quantity={item.quantity}
+            sector={item.sector}
+            cartQuantity={0}
           />
-        );
-      })}
+        ))}
     </SimulationStockGlobal>
   );
 }
@@ -249,7 +193,10 @@ const SimulationStockGlobal = styled.div`
         width: 45%;
       }
 
-      button {
+      .BuyButton,
+      .SaleButton,
+      .BuyButtonNotAllowed,
+      .SaleButtonNotAllowed {
         padding: 6px 8px;
         font-size: 1rem;
         color: white;
@@ -264,24 +211,36 @@ const SimulationStockGlobal = styled.div`
           padding: 1px;
           font-size: 0.8rem;
         }
-
-        &:hover {
-          cursor: pointer;
-        }
       }
 
       .BuyButton {
         background-color: rgb(0, 170, 0);
         margin-right: 10px;
+        cursor: pointer;
 
         @media (max-width: 600px) {
           margin-right: 0px;
         }
       }
 
-      .SellButton {
+      .SaleButton {
         background-color: rgb(240, 30, 60);
         margin-left: 10px;
+        cursor: pointer;
+      }
+
+      .BuyButtonNotAllowed {
+        background-color: grey;
+        color: rgb(230, 230, 230);
+        margin-right: 10px;
+        cursor: not-allowed;
+      }
+
+      .SaleButtonNotAllowed {
+        background-color: grey;
+        color: rgb(230, 230, 230);
+        margin-left: 10px;
+        cursor: not-allowed;
       }
     }
   }

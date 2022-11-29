@@ -5,6 +5,124 @@ import Image from "next/image";
 import LogInIllustration from "../assets/loginform.png";
 import Link from "next/link";
 
+type ErrorProps = {
+  isError: FieldError | undefined;
+};
+
+type FormValues = {
+  username: string;
+  password: string;
+};
+
+function LogIn() {
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormValues>({
+    mode: "onChange",
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    alert("Form submitted: " + JSON.stringify(data));
+    reset();
+  });
+
+  return (
+    <LogInGlobal>
+      <div className="LogInContainer">
+        <LogInForm onSubmit={onSubmit}>
+          <div className="titleBox">
+            <h1 className="formTitle">Connexion</h1>
+            <p className="formSubTitle">Accès à votre compte</p>
+          </div>
+          <LogInInputBox isError={errors.username}>
+            <input
+              type="text"
+              required
+              {...register("username", {
+                required: "Le champ « Nom » est requis.",
+                pattern: {
+                  value: /^[a-zA-Z0-9]+$/,
+                  message:
+                    "Le nom ne doit pas contenir de caractères spéciaux.",
+                },
+              })}
+              id="username"
+              name="username"
+            />
+            <label htmlFor="username">{"Nom d'utilisateur"}</label>
+            {errors.username ? (
+              <p role="alert" style={{ color: "red" }}>
+                {errors.username.message}
+              </p>
+            ) : null}
+          </LogInInputBox>
+          <LogInInputBox isError={errors.password}>
+            <input
+              type={passwordVisible ? "text" : "password"}
+              required
+              {...register("password", {
+                required: "Le champ « Mot de passe » est requis.",
+                minLength: {
+                  value: 8,
+                  message:
+                    "Le mot de passe doit contenir au moins 8 caractères.",
+                },
+              })}
+              id="password"
+              name="password"
+            />
+            <label htmlFor="password">Mot de passe</label>
+            {passwordVisible ? (
+              <i
+                id="passwordVisible"
+                className="fa-solid fa-eye"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              />
+            ) : (
+              <i
+                id="passwordVisible"
+                className="fa-solid fa-eye-slash"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              />
+            )}
+            {errors.password && (
+              <p role="alert" style={{ color: "red" }}>
+                {errors.password.message}
+              </p>
+            )}
+          </LogInInputBox>
+          <button
+            className="submitButton"
+            type="submit"
+            disabled={!errors.password && !errors.username ? false : true}
+          >
+            Se connecter
+          </button>
+          <div>
+            Pas encore de compte ?{" "}
+            <Link
+              style={{ color: "rgb(21,96,189)", fontWeight: "620" }}
+              href="/signin"
+            >
+              {"S'inscrire"}
+            </Link>
+          </div>
+        </LogInForm>
+        <LogInImage>
+          <Image id="Image" src={LogInIllustration} alt="Connexion" />
+        </LogInImage>
+      </div>
+    </LogInGlobal>
+  );
+}
+
+export default LogIn;
+
 const LogInGlobal = styled.div`
   padding: 50px;
   display: flex;
@@ -152,115 +270,3 @@ const LogInImage = styled.div`
     max-width: 500px;
   }
 `;
-
-type ErrorProps = {
-  isError: FieldError | undefined;
-};
-
-type FormValues = {
-  username: string;
-  password: string;
-};
-
-function LogIn() {
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<FormValues>({
-    mode: "onChange",
-  });
-
-  const onSubmit = handleSubmit((data) => {
-    alert("Form submitted: " + JSON.stringify(data));
-    reset();
-  });
-
-  return (
-    <LogInGlobal>
-      <div className="LogInContainer">
-        <LogInForm onSubmit={onSubmit}>
-          <div className="titleBox">
-            <h1 className="formTitle">Connexion</h1>
-            <p className="formSubTitle">Accès à votre compte</p>
-          </div>
-          <LogInInputBox isError={errors.username}>
-            <input
-              type="text"
-              required
-              {...register("username", {
-                required: "Le champ « Nom » est requis.",
-                pattern: {
-                  value: /^[a-zA-Z0-9]+$/,
-                  message:
-                    "Le nom ne doit pas contenir de caractères spéciaux.",
-                },
-              })}
-              id="username"
-              name="username"
-            />
-            <label htmlFor="username">{"Nom d'utilisateur"}</label>
-            {errors.username ? (
-              <p role="alert" style={{ color: "red" }}>
-                {errors.username.message}
-              </p>
-            ) : null}
-          </LogInInputBox>
-          <LogInInputBox isError={errors.password}>
-            <input
-              type={passwordVisible ? "text" : "password"}
-              required
-              {...register("password", {
-                required: "Le champ « Mot de passe » est requis.",
-                minLength: {
-                  value: 8,
-                  message:
-                    "Le mot de passe doit contenir au moins 8 caractères.",
-                },
-              })}
-              id="password"
-              name="password"
-            />
-            <label htmlFor="password">Mot de passe</label>
-            {passwordVisible ? (
-              <i
-                id="passwordVisible"
-                className="fa-solid fa-eye"
-                onClick={() => setPasswordVisible(!passwordVisible)}
-              />
-            ) : (
-              <i
-                id="passwordVisible"
-                className="fa-solid fa-eye-slash"
-                onClick={() => setPasswordVisible(!passwordVisible)}
-              />
-            )}
-            {errors.password && (
-              <p role="alert" style={{ color: "red" }}>
-                {errors.password.message}
-              </p>
-            )}
-          </LogInInputBox>
-          <button
-            className="submitButton"
-            type="submit"
-            disabled={!errors.password && !errors.username ? false : true}
-          >
-            Se connecter
-          </button>
-          <div>
-            Pas encore de compte ? <Link href="/signin">{"S'inscrire"}</Link>.
-          </div>
-        </LogInForm>
-        <LogInImage>
-          <Image id="Image" src={LogInIllustration} alt="Connexion" />
-        </LogInImage>
-      </div>
-    </LogInGlobal>
-  );
-}
-
-export default LogIn;

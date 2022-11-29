@@ -3,6 +3,29 @@ import React from "react";
 import { SECTORS_DATA } from "../datas/sectorsData";
 import styled from "@emotion/styled";
 
+function Sectors() {
+  return (
+    <SectorsGlobal>
+      <div className="SectorsContainer">
+        {SECTORS_DATA.map((item) => {
+          return (
+            <div className="SectorsItem" key={item.id}>
+              <div className="SectorsImage">
+                <Image id="Image" src={item.img} alt={item.name} />
+              </div>
+              <div className="SectorsText">
+                <p>{item.name}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </SectorsGlobal>
+  );
+}
+
+export default Sectors;
+
 const SectorsGlobal = styled.div`
   padding: 50px;
   display: flex;
@@ -74,26 +97,3 @@ const SectorsGlobal = styled.div`
     }
   }
 `;
-
-function Sectors() {
-  return (
-    <SectorsGlobal>
-      <div className="SectorsContainer">
-        {SECTORS_DATA.map((item) => {
-          return (
-            <div className="SectorsItem" key={item.id}>
-              <div className="SectorsImage">
-                <Image id="Image" src={item.img} alt={item.name} />
-              </div>
-              <div className="SectorsText">
-                <p>{item.name}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </SectorsGlobal>
-  );
-}
-
-export default Sectors;

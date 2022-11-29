@@ -3,160 +3,7 @@ import styled from "@emotion/styled";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import LogInIllustration from "../assets/signinform.jpg";
-
-const SignInGlobal = styled.div`
-  padding: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-    padding: 30px 20px;
-  }
-
-  .SignInContainer {
-    width: 100%;
-    display: flex;
-    background-color: white;
-
-    @media (max-width: 1000px) {
-      flex-direction: column;
-    }
-  }
-`;
-
-const SignInForm = styled.form`
-  width: 50%;
-  padding: 40px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 18px;
-
-  @media (max-width: 1000px) {
-    width: 100%;
-  }
-
-  @media (max-width: 900px) {
-    padding: 30px 0px 20px 0px;
-  }
-
-  .titleBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .formTitle {
-      font-size: 2.2rem;
-      font-weight: normal;
-      margin: 0;
-      padding: 0;
-    }
-
-    .formSubTitle {
-      font-size: 1.3rem;
-      margin: 0;
-      padding: 8px 0px 10px 0px;
-      color: rgb(120, 120, 120);
-    }
-  }
-
-  .submitButton {
-    margin-top: 10px;
-    width: 105px;
-    font-size: 1.05rem;
-    padding: 6px 0px;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-`;
-
-const SignInInputBox = styled.div<ErrorProps>`
-  position: relative;
-  width: 400px;
-
-  @media (max-width: 450px) {
-    width: 200px;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px 8px;
-    margin-top: 3px;
-    font-size: 1.1rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 5px;
-    box-shadow: ${({ isError }) =>
-      isError ? "0 0 5px 1px red" : "0 0 5px 1px grey"};
-  }
-
-  label {
-    position: absolute;
-    left: 0;
-    padding: 13.5px 15px;
-    font-size: 1rem;
-    pointer-events: none;
-    transition: 0.3s;
-    color: rgb(120, 120, 120);
-    color: ${({ isError }) => (isError ? "red" : "grey")};
-  }
-
-  input:valid ~ label,
-  input:focus ~ label {
-    transform: translateX(10px) translateY(-7px);
-    font-size: 0.85rem;
-    padding: 0 5px;
-    background-color: white;
-    border-radius: 5px;
-  }
-
-  p {
-    margin: 5px 0px 0px 0px;
-  }
-
-  #passwordVisible {
-    position: absolute;
-    top: 18px;
-    right: 12px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`;
-
-const SignInImage = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-
-  @media (max-width: 1000px) {
-    width: 100%;
-  }
-
-  @media (max-width: 900px) {
-    width: 100%;
-    height: 100%;
-    padding: 25px 0px 40px 0px;
-  }
-
-  #Image {
-    width: 75%;
-    height: auto;
-    max-width: 400px;
-  }
-`;
+import Link from "next/link";
 
 type ErrorProps = {
   isError: FieldError | undefined;
@@ -321,6 +168,15 @@ function SignIn() {
           >
             {"S'inscrire"}
           </button>
+          <div>
+            Vous possédez déjà une compte ?{" "}
+            <Link
+              style={{ color: "rgb(21,96,189)", fontWeight: "620" }}
+              href="/login"
+            >
+              Se connecter.
+            </Link>
+          </div>
         </SignInForm>
         <SignInImage>
           <Image id="Image" src={LogInIllustration} alt="Connexion" />
@@ -331,6 +187,160 @@ function SignIn() {
 }
 
 export default SignIn;
+
+const SignInGlobal = styled.div`
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+
+  .SignInContainer {
+    width: 100%;
+    display: flex;
+    background-color: white;
+
+    @media (max-width: 1000px) {
+      flex-direction: column;
+    }
+  }
+`;
+
+const SignInForm = styled.form`
+  width: 50%;
+  padding: 40px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    padding: 30px 0px 20px 0px;
+  }
+
+  .titleBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .formTitle {
+      font-size: 2.2rem;
+      font-weight: normal;
+      margin: 0;
+      padding: 0;
+    }
+
+    .formSubTitle {
+      font-size: 1.3rem;
+      margin: 0;
+      padding: 8px 0px 10px 0px;
+      color: rgb(120, 120, 120);
+    }
+  }
+
+  .submitButton {
+    margin-top: 10px;
+    width: 105px;
+    font-size: 1.05rem;
+    padding: 6px 0px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+`;
+
+const SignInInputBox = styled.div<ErrorProps>`
+  position: relative;
+  width: 400px;
+
+  @media (max-width: 450px) {
+    width: 200px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 8px;
+    margin-top: 3px;
+    font-size: 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+    box-shadow: ${({ isError }) =>
+      isError ? "0 0 5px 1px red" : "0 0 5px 1px grey"};
+  }
+
+  label {
+    position: absolute;
+    left: 0;
+    padding: 13.5px 15px;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.3s;
+    color: rgb(120, 120, 120);
+    color: ${({ isError }) => (isError ? "red" : "grey")};
+  }
+
+  input:valid ~ label,
+  input:focus ~ label {
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.85rem;
+    padding: 0 5px;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  p {
+    margin: 5px 0px 0px 0px;
+  }
+
+  #passwordVisible {
+    position: absolute;
+    top: 18px;
+    right: 12px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+const SignInImage = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    width: 100%;
+    height: 100%;
+    padding: 25px 0px 40px 0px;
+  }
+
+  #Image {
+    width: 75%;
+    height: auto;
+    max-width: 400px;
+  }
+`;
 
 /*
 test("When we click on submit button", () => {

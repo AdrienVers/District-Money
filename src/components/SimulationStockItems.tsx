@@ -1,7 +1,14 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, CartItem, selectCartItemById } from "../redux/cartSlice";
+import {
+  addToCart,
+  decreaseCart,
+  getTotals,
+  CartItem,
+  selectCartItemById,
+} from "../redux/cartSlice";
+import { RootState } from "../redux/store";
 
 interface SimulationStockItemsProps {
   id: string;
@@ -9,9 +16,9 @@ interface SimulationStockItemsProps {
   name: string;
   price: number;
   nextPrice: number;
+  cartQuantity: number;
   market: string;
   sector: string;
-  quantity: number;
 }
 
 function SimulationStockItems({
@@ -20,49 +27,44 @@ function SimulationStockItems({
   name,
   price,
   nextPrice,
+  cartQuantity,
   market,
   sector,
-  quantity,
 }: SimulationStockItemsProps) {
-  //const dispatch = useDispatch();
+
+  const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+
   const cartItem = useSelector(selectCartItemById(id));
 
-  const addedCount = cartItem ? cartItem.count : 0;
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cart, dispatch]);
 
-  const onClickAdd = () => {
+  const onClickBuy = () => {
     const item: CartItem = {
       id,
       name,
       price,
       nextPrice,
-      logo,
-      count: 0,
+      cartQuantity,
     };
-    dispatch(addItem(item));
+    dispatch(addToCart(item));
   };
 
-  /*
-  function addItemToBasket() {
-    const stock = {
+  const onClickSale = () => {
+    const item: CartItem = {
       id,
-      imageUrl,
-      title,
+      name,
       price,
-      nextValue,
-      market,
-      sector,
-      quantity: (quantity += 1),
+      nextPrice,
+      cartQuantity,
     };
-
-    //Object.values(stock).find((item) => item.id === id);
-
-    dispatch(addToBasket(stock));
-  }
-  */
+    dispatch(decreaseCart(item));
+  };
 
   return (
-    <div className="SimulationStockItem">
+    <div key={id} className="SimulationStockItem">
       <div className="SimulationStockLogo">
         <Image className="Logo" src={logo} width="200" height="65" alt={name} />
       </div>
@@ -71,15 +73,23 @@ function SimulationStockItems({
       <div className="SimulationStockMarket">{market}</div>
       <div className="SimulationStockSector">{sector}</div>
       <div className="SimulationStockButtons">
-        <button onClick={onClickAdd} className="BuyButton">
+        <button
+          onClick={onClickBuy}
+          className={"BuyButton"}
+        >
           Achat
         </button>
-        {/*  
-        <button onClick={() => addItemToBasket()} className="BuyButton">
-          Achat
+        <button
+          onClick={onClickSale}
+          className={
+            cartItem && cartItem.cartQuantity > 0
+              ? "SaleButton"
+              : "SaleButtonNotAllowed"
+          }
+          disabled={cartItem && cartItem.cartQuantity > 0 ? false : true}
+        >
+          Vente
         </button>
-        */}
-        <button className="SellButton">Vente</button>
       </div>
     </div>
   );

@@ -1,49 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import { BASKET_TITLE_DATA } from "../datas/basketData";
-//import { useSelector } from "react-redux";
-//import { quantityValue } from "../store";
-import SimulationBasketItems from "./SimulationBasketItems";
-import { selectCart } from "../redux/cartSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getTotals } from "../redux/cartSlice";
+import { RootState } from "../redux/store";
 
 function SimulationBasket() {
-  //const items = useSelector(quantityValue);
-  const { totalPrice, items } = useSelector(selectCart);
+  const cart = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
 
-  const totalCount = items.reduce(
-    (sum: number, item: any) => sum + item.count,
-    0
-  );
-
-  /*
-  if (!totalPrice) {
-    return <p>Ah !</p>;
-  }
-  */
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cart, dispatch]);
 
   return (
     <SimulationBasketGlobal>
-      <h2 style={{ margin: "2px" }}>Portefeuille en temps réel : </h2>
-      <span>
-        Quantité totales des actions: <b>{totalCount}.</b>{" "}
-      </span>
-      <span>
-        Valeur totale : <b>{totalPrice} EUR</b>
-      </span>
-      <p>
-        {/*  
-        {items.length !== 0
-          ? `Vous êtes actionnaire de ${
-              items.length > 1
-                ? `${items.length} entreprises.`
-                : `${items.length} entreprise.`
-            }`
-          : `Vous n'êtes pas encore actionnaire, pour le devenir commencez à acheter des actions. `}
-        Votre solde est de <strong>500 EUR en espèce</strong> et de{" "}
-        <strong>40 EUR en actif</strong>.
-     */}
-      </p>
+      <h2 style={{ margin: "5px 0px 10px 0px" }}>
+        Portefeuille (2 jours après achat) :
+      </h2>
       {BASKET_TITLE_DATA.map((item) => {
         return (
           <div key={item.id} className="SimulationBasketItemTitles">
@@ -58,23 +32,47 @@ function SimulationBasket() {
           </div>
         );
       })}
-      {/*  
-      <div>
-          {items.map((item: any) => (
-            <CartItem key={item.id} {...item} />
-          ))}
+      {cart.cartItems &&
+        cart.cartItems.map((item: any) => {
+          return (
+            <div className="SimulationBasketItem" key={item.id}>
+              <div className="SimulationBasketTitle">{item.name}</div>
+              <div className="SimulationBasketQuantity">
+                {item.cartQuantity}
+              </div>
+              <div className="SimulationBasketInitialPrice">
+                {item.price * item.cartQuantity} EUR
+              </div>
+              <div className="SimulationBasketRate">
+                {item.nextPrice * item.cartQuantity} EUR
+              </div>
+              <div className="SimulationBasketValue">
+                {item.nextPrice * item.cartQuantity} EUR
+              </div>
+              <div className="SimulationBasketGain">
+                {item.nextPrice * item.cartQuantity -
+                  item.price * item.cartQuantity}{" "}
+                EUR
+              </div>
+            </div>
+          );
+        })}
+      <div className="SimulationBasketItemResume">
+        <div style={{ fontWeight: "500" }} className="SimulationBasketTitle">
+          SOMME TOTALE
         </div>
-        */}
- 
-      {items.map((item: any) => {
-        return (
-          <SimulationBasketItems
-            key={item.id}
-            {...item}
-          />
-        );
-      })}
- 
+        <div className="SimulationBasketQuantity">{cart.cartTotalQuantity}</div>
+        <div className="SimulationBasketInitialPrice">
+          {cart.cartTotalAmount} EUR
+        </div>
+        <div className="SimulationBasketRate">
+          {cart.cartTotalNextAmount} EUR
+        </div>
+        <div className="SimulationBasketValue">
+          {cart.cartTotalNextAmount} EUR
+        </div>
+        <div className="SimulationBasketGain">{cart.cartTotalGain} EUR</div>
+      </div>
     </SimulationBasketGlobal>
   );
 }
@@ -92,8 +90,16 @@ const SimulationBasketGlobal = styled.div`
     }
   }
 
+  .BasketResume {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 2px 0px 5px 0px;
+  }
+
   .SimulationBasketItem,
-  .SimulationBasketItemTitles {
+  .SimulationBasketItemTitles,
+  .SimulationBasketItemResume {
     display: flex;
     width: 100%;
     margin: 5px 0px;
@@ -146,5 +152,10 @@ const SimulationBasketGlobal = styled.div`
     padding: 5px;
     background-color: rgb(10, 20, 100);
     color: white;
+  }
+
+  .SimulationBasketItemResume {
+    background-color: gold;
+    color: black;
   }
 `;

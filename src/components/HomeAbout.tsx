@@ -6,48 +6,6 @@ import Europe from "../assets/Europe.png";
 import Securite from "../assets/Securite.png";
 import Image from "next/image";
 
-const HomeAboutGlobal = styled.div`
-  display: flex;
-  padding: 0px 50px 50px 50px;
-
-  @media (max-width: 900px) {
-    padding: 0px 20px 20px 20px;
-  }
-
-  .HomeAboutContainer {
-    width: 100%;
-    display: flex;
-    background-color: white;
-
-    @media (max-width: 1000px) {
-      flex-direction: column;
-    }
-
-    .Invest {
-      width: 25%;
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      flex-direction: column;
-      padding: 15px;
-
-      @media (max-width: 1000px) {
-        width: 100%;
-      }
-
-      h2 {
-        text-align: center;
-      }
-
-      #Image {
-        width: 40%;
-        height: auto;
-        max-width: 150px;
-      }
-    }
-  }
-`;
-
 function HomeAbout() {
   return (
     <HomeAboutGlobal>
@@ -97,3 +55,45 @@ function HomeAbout() {
 }
 
 export default HomeAbout;
+
+const HomeAboutGlobal = styled.div`
+  display: flex;
+  padding: 0px 50px 50px 50px;
+
+  @media (max-width: 900px) {
+    padding: 0px 20px 20px 20px;
+  }
+
+  .HomeAboutContainer {
+    width: 100%;
+    display: flex;
+    background-color: white;
+
+    @media (max-width: 1000px) {
+      flex-direction: column;
+    }
+
+    .Invest {
+      width: 25%;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      flex-direction: column;
+      padding: 15px;
+
+      @media (max-width: 1000px) {
+        width: 100%;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      #Image {
+        width: 40%;
+        height: auto;
+        max-width: 150px;
+      }
+    }
+  }
+`;

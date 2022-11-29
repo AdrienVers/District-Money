@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Logo from "../assets/logo.png";
 import Link from "next/link";
 import { NAVBAR_DATA } from "../datas/navbarData";
+import { getTotals } from "../redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 type AnimationProps = {
   isActive: boolean;
@@ -11,7 +14,12 @@ type AnimationProps = {
 
 function Navbar() {
   const [active, setActive] = useState(false);
-  console.log(active);
+  const cart = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cart, dispatch]);
 
   return (
     <NavbarGlobal>
@@ -51,10 +59,14 @@ function Navbar() {
           </Link>
         );
       })}
-      <Link href="/signin">
+      <Link href="/investment">
         <button className="demoButton">
-          <span>Commencer à investir </span>
+          <span>Mes investissements </span>
           <i className="fa-solid fa-money-bill-trend-up"></i>
+
+          <div className="demonButtonCounter">
+            <p className="counter">{cart.cartTotalQuantity}</p>
+          </div>
         </button>
       </Link>
       <Link href="/login">
@@ -131,6 +143,7 @@ const NavbarGlobal = styled.div`
   }
 
   .demoButton {
+    position: relative;
     @media (max-width: 520px) {
       span {
         display: none;
@@ -139,6 +152,24 @@ const NavbarGlobal = styled.div`
       i {
         color: white;
         padding: 0px;
+      }
+    }
+
+    .demonButtonCounter {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      height: 23px;
+      width: 23px;
+      border-radius: 50px;
+      background-color: dodgerblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .counter {
+        color: white;
+        font-size: 0.9rem;
       }
     }
   }

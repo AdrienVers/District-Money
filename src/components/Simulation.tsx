@@ -16,21 +16,6 @@ function Simulation() {
 
 export default Simulation;
 
-/*
-    const currentStock = Object.values(stock);
-    let alreadyInBasket = false;
-    currentStock.forEach((item) => {
-      if (item.id === id) {
-        quantity += quantity;
-        alreadyInBasket = true;
-      }
-    });
-    if (!alreadyInBasket) {
-      dispatch(addToBasket(stock));
-    }
-  }
-  */
-
 const SimulationGlobal = styled.div`
   padding: 50px;
   display: flex;
