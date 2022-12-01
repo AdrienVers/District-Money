@@ -38,7 +38,7 @@ function Footer() {
       </FooterLinks>
       <FooterCopyright>
         <div className="FooterTitle">
-          <p>Distric Money ® 2022 - Tous droits réservés</p>
+          <p>District Money ® 2022 - Tous droits réservés</p>
         </div>
         <div className="FooterIcons">
           <div className="Icon">
@@ -74,7 +74,7 @@ const FooterLinks = styled.div`
   justify-content: flex-start;
   background-color: white;
   font-size: 1.2rem;
-  margin : 5px 0px 30px 0px;
+  margin: 5px 0px 30px 0px;
 
   #Help {
     width: 20%;
@@ -114,8 +114,8 @@ const FooterLinks = styled.div`
 
     @media (max-width: 800px) {
       width: 100%;
-      text-align : center;
-      font-size : 1rem;
+      text-align: center;
+      font-size: 1rem;
     }
   }
 
@@ -133,7 +133,7 @@ const FooterLinks = styled.div`
     align-items: center;
 
     p {
-      padding : 0px 5px;
+      padding: 0px 5px;
       margin: 5px 0px;
       &:hover {
         cursor: pointer;
@@ -141,7 +141,7 @@ const FooterLinks = styled.div`
     }
 
     h3 {
-      text-align : center;
+      text-align: center;
     }
   }
 `;
@@ -163,10 +163,10 @@ const FooterCopyright = styled.div`
     align-items: center;
     justify-content: flex-start;
 
-    @media(max-width : 700px) {
-      width : 100%;
+    @media (max-width: 700px) {
+      width: 100%;
       justify-content: center;
-      text-align : center;
+      text-align: center;
     }
   }
 
@@ -176,8 +176,8 @@ const FooterCopyright = styled.div`
     justify-content: flex-end;
     align-items: center;
 
-    @media(max-width : 700px) {
-      display : none;
+    @media (max-width: 700px) {
+      display: none;
     }
 
     .Icon {
