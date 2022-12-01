@@ -40,7 +40,7 @@ function SimulationStock() {
 
   return (
     <SimulationStockGlobal>
-      <h2 style={{ margin: "5px 0px 10px 0px" }}>
+      <h2 style={{ margin: "12px 0px 10px 0px" }}>
         Marché boursier en temps réel :
       </h2>
       {STOCKS_TITLE_DATA.map((item) => {

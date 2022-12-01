@@ -162,7 +162,7 @@ const NavbarGlobal = styled.div`
       height: 23px;
       width: 23px;
       border-radius: 50px;
-      background-color: dodgerblue;
+      background-color: rgb(0, 150, 220);
       display: flex;
       justify-content: center;
       align-items: center;

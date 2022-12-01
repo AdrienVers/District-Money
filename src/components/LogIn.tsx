@@ -103,13 +103,13 @@ function LogIn() {
           >
             Se connecter
           </button>
-          <div>
+          <div className="GoToSignin">
             Pas encore de compte ?{" "}
             <Link
-              style={{ color: "rgb(21,96,189)", fontWeight: "620" }}
+              style={{ color: "rgb(30,60,130)", fontWeight: "620" }}
               href="/signin"
             >
-              {"S'inscrire"}
+              {"S'inscrire."}
             </Link>
           </div>
         </LogInForm>
@@ -142,6 +142,10 @@ const LogInGlobal = styled.div`
     @media (max-width: 900px) {
       flex-direction: column;
     }
+  }
+
+  .GoToSignin {
+    text-align: center;
   }
 `;
 

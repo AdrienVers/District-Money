@@ -9,9 +9,7 @@ function HomeJoinUs() {
     <HomeJoinUsGlobal>
       <div className="HomeJoinUsContainer">
         <div className="HomeJoinUsText">
-          <h1>
-            Devenez acteur de vos investissements grâce à District Market.
-          </h1>
+          <h1>Devenez acteur de vos investissements grâce à District Money.</h1>
           <p>
             Quel que soit votre projet, nous vous aidons à trouver la meilleure
             stratégie
@@ -144,4 +142,3 @@ const HomeJoinUsGlobal = styled.div`
     }
   }
 `;
-
