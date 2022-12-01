@@ -5,7 +5,7 @@ interface AnswerProps {
   index: number;
 }
 
-const Answer = ({ index }: AnswerProps) => {
+const QuizzAnswer = ({ index }: AnswerProps) => {
   const letterMapping = ["A", "B", "C", "D"];
   return (
     <AnswerGlobal>
@@ -15,7 +15,7 @@ const Answer = ({ index }: AnswerProps) => {
   );
 };
 
-export default Answer;
+export default QuizzAnswer;
 
 const AnswerGlobal = styled.div`
   width: 50%;
