@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { SECTORS_DATA } from "../datas/sectorsData";
+import { SECTORS_DATA } from "../../datas/sectorsData";
 import styled from "@emotion/styled";
 
 function Sectors() {

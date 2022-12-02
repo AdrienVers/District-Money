@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
-import LogInIllustration from "../assets/loginform.png";
+import LogInIllustration from "../../assets/signinform.jpg";
 import Link from "next/link";
 
 type ErrorProps = {
@@ -11,11 +11,15 @@ type ErrorProps = {
 
 type FormValues = {
   username: string;
+  email: string;
   password: string;
+  confirmation: string;
 };
 
-function LogIn() {
+function SignIn() {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [confirmationVisible, setConfirmationVisible] =
+    useState<boolean>(false);
 
   const {
     register,
@@ -32,19 +36,19 @@ function LogIn() {
   });
 
   return (
-    <LogInGlobal>
-      <div className="LogInContainer">
-        <LogInForm onSubmit={onSubmit}>
+    <SignInGlobal>
+      <div className="SignInContainer">
+        <SignInForm onSubmit={onSubmit}>
           <div className="titleBox">
-            <h1 className="formTitle">Connexion</h1>
-            <p className="formSubTitle">Accès à votre compte</p>
+            <h1 className="formTitle">Inscription</h1>
+            <p className="formSubTitle">Création de votre compte</p>
           </div>
-          <LogInInputBox isError={errors.username}>
+          <SignInInputBox isError={errors.username}>
             <input
               type="text"
               required
               {...register("username", {
-                required: "Le champ « Nom » est requis.",
+                required: "Le champ « Nom d'utilisateur » est requis.",
                 pattern: {
                   value: /^[a-zA-Z0-9]+$/,
                   message:
@@ -60,8 +64,30 @@ function LogIn() {
                 {errors.username.message}
               </p>
             ) : null}
-          </LogInInputBox>
-          <LogInInputBox isError={errors.password}>
+          </SignInInputBox>
+          <SignInInputBox isError={errors.email}>
+            <input
+              type="text"
+              required
+              {...register("email", {
+                required: "Le champ « Adresse e-mail » est requis.",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message:
+                    "L'e-mail doit avoir un format valide de type : abc@exemple.com",
+                },
+              })}
+              id="email"
+              name="email"
+            />
+            <label htmlFor="email">Adresse e-mail</label>
+            {errors.email ? (
+              <p role="alert" style={{ color: "red" }}>
+                {errors.email.message}
+              </p>
+            ) : null}
+          </SignInInputBox>
+          <SignInInputBox isError={errors.password}>
             <input
               type={passwordVisible ? "text" : "password"}
               required
@@ -95,35 +121,74 @@ function LogIn() {
                 {errors.password.message}
               </p>
             )}
-          </LogInInputBox>
+          </SignInInputBox>
+          <SignInInputBox isError={errors.confirmation}>
+            <input
+              type={confirmationVisible ? "text" : "password"}
+              required
+              {...register("confirmation", {
+                required: "Le champ « Confirmation » est requis.",
+                minLength: {
+                  value: 8,
+                  message:
+                    "Le mot de passe doit contenir au moins 8 caractères.",
+                },
+              })}
+              id="confirmation"
+              name="confirmation"
+            />
+            <label htmlFor="confirmation">Confirmation</label>
+            {confirmationVisible ? (
+              <i
+                id="passwordVisible"
+                className="fa-solid fa-eye"
+                onClick={() => setConfirmationVisible(!confirmationVisible)}
+              />
+            ) : (
+              <i
+                id="passwordVisible"
+                className="fa-solid fa-eye-slash"
+                onClick={() => setConfirmationVisible(!confirmationVisible)}
+              />
+            )}
+            {errors.confirmation && (
+              <p role="alert" style={{ color: "red" }}>
+                {errors.confirmation.message}
+              </p>
+            )}
+          </SignInInputBox>
           <button
             className="submitButton"
             type="submit"
-            disabled={!errors.password && !errors.username ? false : true}
+            disabled={
+              !errors.password && !errors.username && !errors.email
+                ? false
+                : true
+            }
           >
-            Se connecter
+            {"S'inscrire"}
           </button>
-          <div className="GoToSignin">
-            Pas encore de compte ?{" "}
+          <div className="GoToLogin">
+            Vous possédez déjà une compte ?{" "}
             <Link
               style={{ color: "rgb(30,60,130)", fontWeight: "620" }}
-              href="/signin"
+              href="/login"
             >
-              {"S'inscrire."}
+              Se connecter.
             </Link>
           </div>
-        </LogInForm>
-        <LogInImage>
+        </SignInForm>
+        <SignInImage>
           <Image id="Image" src={LogInIllustration} alt="Connexion" />
-        </LogInImage>
+        </SignInImage>
       </div>
-    </LogInGlobal>
+    </SignInGlobal>
   );
 }
 
-export default LogIn;
+export default SignIn;
 
-const LogInGlobal = styled.div`
+const SignInGlobal = styled.div`
   padding: 50px;
   display: flex;
   align-items: center;
@@ -134,33 +199,36 @@ const LogInGlobal = styled.div`
     padding: 30px 20px;
   }
 
-  .LogInContainer {
-    background-color: dodgerblue;
+  .SignInContainer {
     width: 100%;
     display: flex;
+    background-color: white;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
       flex-direction: column;
     }
   }
 
-  .GoToSignin {
+  .GoToLogin {
     text-align: center;
+    padding: 0px 10px;
   }
 `;
 
-const LogInForm = styled.form`
+const SignInForm = styled.form`
   width: 50%;
   padding: 40px 0px;
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 30px;
+  gap: 18px;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 
   @media (max-width: 900px) {
-    width: 100%;
     padding: 30px 0px 20px 0px;
   }
 
@@ -180,14 +248,14 @@ const LogInForm = styled.form`
     .formSubTitle {
       font-size: 1.3rem;
       margin: 0;
-      padding: 10px 0px 15px 0px;
+      padding: 8px 0px 10px 0px;
       color: rgb(120, 120, 120);
     }
   }
 
   .submitButton {
     margin-top: 10px;
-    width: 125px;
+    width: 105px;
     font-size: 1.05rem;
     padding: 6px 0px;
 
@@ -201,11 +269,11 @@ const LogInForm = styled.form`
   }
 `;
 
-const LogInInputBox = styled.div<ErrorProps>`
+const SignInInputBox = styled.div<ErrorProps>`
   position: relative;
-  width: 250px;
+  width: 400px;
 
-  @media (max-width: 330px) {
+  @media (max-width: 450px) {
     width: 200px;
   }
 
@@ -255,22 +323,46 @@ const LogInInputBox = styled.div<ErrorProps>`
   }
 `;
 
-const LogInImage = styled.div`
+const SignInImage = styled.div`
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
 
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+
   @media (max-width: 900px) {
     width: 100%;
     height: 100%;
-    padding: 30px 0px 40px 0px;
+    padding: 25px 0px 40px 0px;
   }
 
   #Image {
-    width: 80%;
+    width: 75%;
     height: auto;
-    max-width: 500px;
+    max-width: 400px;
   }
 `;
+
+/*
+test("When we click on submit button", () => {
+  const mockSubmission = jest.fn();
+  render(<Account submission={mockSubmission} />);
+  const emailInput = screen.getByLabelText(/Email/i);
+  userEvent.type(emailInput, "test@example.org");
+  const passwordInput = screen.getByLabelText(/Mot de passe/i);
+  userEvent.type(passwordInput, "password");
+  const submitButton = screen.getByRole("button", {
+    name: /Se connecter/i,
+  });
+  fireEvent.click(submitButton);
+  expect(mockSubmission.mock.calls.length).toBe(1);
+  expect(mockSubmission.mock.calls[0][0]).toEqual({
+    email: "test@example.org",
+    password: "password",
+  });
+});
+*/

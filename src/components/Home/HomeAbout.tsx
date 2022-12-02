@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Actionnaire from "../assets/Actionnaire.png";
-import Entreprise from "../assets/Entreprise.png";
-import Europe from "../assets/Europe.png";
-import Securite from "../assets/Securite.png";
+import Actionnaire from "../../assets/Actionnaire.png";
+import Entreprise from "../../assets/Entreprise.png";
+import Europe from "../../assets/Europe.png";
+import Securite from "../../assets/Securite.png";
 import Image from "next/image";
 
 function HomeAbout() {

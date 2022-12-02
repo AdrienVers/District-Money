@@ -1,9 +1,9 @@
 import Head from "next/head";
 import styled from "@emotion/styled";
 import Link from "next/link";
-import HomeJoinUs from "../components/HomeJoinUs";
-import HomeSectors from "../components/HomeSectors";
-import HomeAbout from "../components/HomeAbout";
+import HomeJoinUs from "../components/Home/HomeJoinUs";
+import HomeSectors from "../components/Home/HomeSectors";
+import HomeAbout from "../components/Home/HomeAbout";
 
 const HomeGlobal = styled.div`
   background-color: rgb(10, 20, 100);

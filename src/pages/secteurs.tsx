@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import Sectors from "../components/Sectors";
+import Sectors from "../components/Sectors/Sectors";
 import styled from "@emotion/styled";
 
 const SecteursGlobal = styled.div`

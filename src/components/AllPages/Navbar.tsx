@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import Logo from "../assets/logo.png";
+import Logo from "../../assets/logo.png";
 import Link from "next/link";
-import { NAVBAR_DATA } from "../datas/navbarData";
-import { getTotals } from "../redux/cartSlice";
+import { NAVBAR_DATA } from "../../datas/navbarData";
+import { getTotals } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 
 type AnimationProps = {
   isActive: boolean;
@@ -141,6 +141,27 @@ const NavbarGlobal = styled.div`
       }
     }
   }
+
+  /*
+  .lightButton {
+    border-radius: 50px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    box-shadow: inset 0px 0px 0px 1px black;
+
+    &:hover {
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+  }
+  */
 
   .demoButton {
     position: relative;

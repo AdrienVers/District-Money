@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { STOCKS_TITLE_DATA, STOCKS_DATA } from "../datas/stocksData";
+import { STOCKS_TITLE_DATA } from "../../datas/stocksData";
 import axios from "axios";
-import SimulationStockItems from "./SimulationStockItems";
+import SimulationStockItems from "./StockItems";
 
 interface StocksProps {
   map(arg0: (item: any) => JSX.Element): React.ReactNode;
@@ -16,7 +16,6 @@ interface StocksProps {
 }
 
 function SimulationStock() {
-
   const [stock, setStock] = React.useState<StocksProps>();
 
   React.useEffect(() => {

@@ -7,8 +7,8 @@ import {
   getTotals,
   CartItem,
   selectCartItemById,
-} from "../redux/cartSlice";
-import { RootState } from "../redux/store";
+} from "../../redux/cartSlice";
+import { RootState } from "../../redux/store";
 
 interface SimulationStockItemsProps {
   id: string;
@@ -31,7 +31,6 @@ function SimulationStockItems({
   market,
   sector,
 }: SimulationStockItemsProps) {
-
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
@@ -75,7 +74,11 @@ function SimulationStockItems({
       <div className="SimulationStockButtons">
         <button
           onClick={onClickBuy}
-          className={"BuyButton"}
+          // className={"BuyButton"}
+          className={
+            cart.cartTotalCash - price > 0 ? "BuyButton" : "BuyButtonNotAllowed"
+          }
+          disabled={cart.cartTotalCash - price > 0 ? false : true}
         >
           Achat
         </button>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
-import MakeMoney from "../assets/MakeMoney.png";
+import MakeMoney from "../../assets/MakeMoney.png";
 
 function HomeJoinUs() {
   return (
@@ -14,11 +14,14 @@ function HomeJoinUs() {
             Quel que soit votre projet, nous vous aidons à trouver la meilleure
             stratégie
             {" d'investissement"} adaptée à votre profil. Vous pouvez découvrir
-            votre profil investisseur en moins de 5 minutes à {"l'aide"} de
-            notre questionnaire.
+            votre profil investisseur en moins de 5 minutes à {"l'aide d'un"}{" "}
+            court questionnaire.
           </p>
           <div className="HomeJoinUsButtons">
-            <Link href="/quizz">
+            <Link
+              target="_blank"
+              href="https://lautorite.qc.ca/grand-public/outils-et-calculateurs/calculateurs/votre-profil-dinvestisseur"
+            >
               <button className="quizzButton">
                 Déterminer son profil investisseur
               </button>

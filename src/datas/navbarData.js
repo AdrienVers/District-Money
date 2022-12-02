@@ -9,11 +9,13 @@ export const NAVBAR_DATA = [
     name: "S'initier à la Bouse",
     path: "/bourse",
   },
+  /*
   {
     id: 3,
     name: "Quizz",
     path: "/quizz",
   },
+  */
   {
     id: 4,
     name: "Lexique",

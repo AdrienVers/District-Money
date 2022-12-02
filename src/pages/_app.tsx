@@ -1,9 +1,9 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/AllPages/Navbar";
+import Footer from "../components/AllPages/Footer";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
-import Footer from "../components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

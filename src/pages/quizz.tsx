@@ -1,8 +1,8 @@
 import Head from "next/head";
 import React from "react";
 import styled from "@emotion/styled";
-import QuizzQuestion from "../components/QuizzQuestion";
-import QuizzButtons from "../components/QuizzButtons";
+import QuizzQuestion from "../components/Quizz/QuizzQuestion";
+import QuizzButtons from "../components/Quizz/QuizzButtons";
 
 const QuizzGlobal = styled.div`
   background-color: rgb(10, 20, 100);

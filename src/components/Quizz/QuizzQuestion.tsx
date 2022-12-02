@@ -1,6 +1,6 @@
 //import { useContext } from "react";
 import QuizzAnswer from "./QuizzAnswer";
-import { QUIZZ_DATA } from "../datas/quizzData";
+import { QUIZZ_DATA } from "../../datas/quizzData";
 import styled from "@emotion/styled";
 
 const QuizzQuestion = () => {

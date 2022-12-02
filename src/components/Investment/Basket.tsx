@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "@emotion/styled";
-import { BASKET_TITLE_DATA } from "../datas/basketData";
+import { BASKET_TITLE_DATA } from "../../datas/basketData";
 import { useDispatch, useSelector } from "react-redux";
-import { getTotals } from "../redux/cartSlice";
-import { RootState } from "../redux/store";
+import { getTotals } from "../../redux/cartSlice";
+import { RootState } from "../../redux/store";
 
 function SimulationBasket() {
   const cart = useSelector((state: RootState) => state.cart);
@@ -18,6 +18,10 @@ function SimulationBasket() {
       <h2 style={{ margin: "5px 0px 10px 0px" }}>
         Portefeuille (2 jours après achat) :
       </h2>
+      <p>
+        Votre solde en espèces : <strong>{cart.cartTotalCash} EUR</strong>.
+      </p>
+      {/* Votre solde en actifs : <strong>0 EUR</strong>. */}
       {BASKET_TITLE_DATA.map((item) => {
         return (
           <div key={item.id} className="SimulationBasketItemTitles">

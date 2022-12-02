@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import SignIn from "../components/SignIn";
+import SignIn from "../components/Forms/SignIn";
 import styled from "@emotion/styled";
 
 const SignInGlobal = styled.div`
