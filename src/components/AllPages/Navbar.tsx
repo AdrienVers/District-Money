@@ -7,6 +7,7 @@ import { NAVBAR_DATA } from "../../datas/navbarData";
 import { getTotals } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import useStore from "../../store/useStore";
 
 type AnimationProps = {
   isActive: boolean;
@@ -14,12 +15,7 @@ type AnimationProps = {
 
 function Navbar() {
   const [active, setActive] = useState(false);
-  const cart = useSelector((state: RootState) => state.cart);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTotals());
-  }, [cart, dispatch]);
+  const { quantityTotal } = useStore();
 
   return (
     <NavbarGlobal>
@@ -65,7 +61,7 @@ function Navbar() {
           <i className="fa-solid fa-money-bill-trend-up"></i>
 
           <div className="demonButtonCounter">
-            <p className="counter">{cart.cartTotalQuantity}</p>
+            <p className="counter">{quantityTotal}</p>
           </div>
         </button>
       </Link>

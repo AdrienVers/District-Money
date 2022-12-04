@@ -1,17 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { BASKET_TITLE_DATA } from "../../datas/basketData";
-import { useDispatch, useSelector } from "react-redux";
-import { getTotals } from "../../redux/cartSlice";
-import { RootState } from "../../redux/store";
+import useStore from "../../store/useStore";
 
 function SimulationBasket() {
-  const cart = useSelector((state: RootState) => state.cart);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTotals());
-  }, [cart, dispatch]);
+  const { cash, quantityTotal, priceTotal, nextPriceTotal } = useStore();
+  const store = useStore();
 
   return (
     <SimulationBasketGlobal>
@@ -19,9 +13,8 @@ function SimulationBasket() {
         Portefeuille (2 jours après achat) :
       </h2>
       <p>
-        Votre solde en espèces : <strong>{cart.cartTotalCash} EUR</strong>.
+        Votre solde en espèce : <strong>{cash} EUR</strong>.
       </p>
-      {/* Votre solde en actifs : <strong>0 EUR</strong>. */}
       {BASKET_TITLE_DATA.map((item) => {
         return (
           <div key={item.id} className="SimulationBasketItemTitles">
@@ -36,46 +29,37 @@ function SimulationBasket() {
           </div>
         );
       })}
-      {cart.cartItems &&
-        cart.cartItems.map((item: any) => {
-          return (
-            <div className="SimulationBasketItem" key={item.id}>
-              <div className="SimulationBasketTitle">{item.name}</div>
-              <div className="SimulationBasketQuantity">
-                {item.cartQuantity}
-              </div>
-              <div className="SimulationBasketInitialPrice">
-                {item.price * item.cartQuantity} EUR
-              </div>
-              <div className="SimulationBasketRate">
-                {item.nextPrice * item.cartQuantity} EUR
-              </div>
-              <div className="SimulationBasketValue">
-                {item.nextPrice * item.cartQuantity} EUR
-              </div>
-              <div className="SimulationBasketGain">
-                {item.nextPrice * item.cartQuantity -
-                  item.price * item.cartQuantity}{" "}
-                EUR
-              </div>
+      {store.basket.map((item) => {
+        return (
+          <div key={item.id} className="SimulationBasketItem">
+            <div className="SimulationBasketTitle">{item.name}</div>
+            <div className="SimulationBasketQuantity">{item.quantity}</div>
+            <div className="SimulationBasketInitialPrice">
+              {item.price * item.quantity} EUR
             </div>
-          );
-        })}
+            <div className="SimulationBasketRate">
+              {item.nextPrice * item.quantity} EUR
+            </div>
+            <div className="SimulationBasketValue">
+              {item.nextPrice * item.quantity} EUR
+            </div>
+            <div className="SimulationBasketGain">
+              {item.nextPrice * item.quantity - item.price * item.quantity} EUR
+            </div>
+          </div>
+        );
+      })}
       <div className="SimulationBasketItemResume">
         <div style={{ fontWeight: "500" }} className="SimulationBasketTitle">
           SOMME TOTALE
         </div>
-        <div className="SimulationBasketQuantity">{cart.cartTotalQuantity}</div>
-        <div className="SimulationBasketInitialPrice">
-          {cart.cartTotalAmount} EUR
+        <div className="SimulationBasketQuantity">{quantityTotal}</div>
+        <div className="SimulationBasketInitialPrice">{priceTotal} EUR</div>
+        <div className="SimulationBasketRate">{nextPriceTotal} EUR</div>
+        <div className="SimulationBasketValue">{nextPriceTotal} EUR</div>
+        <div className="SimulationBasketGain">
+          {nextPriceTotal - priceTotal} EUR
         </div>
-        <div className="SimulationBasketRate">
-          {cart.cartTotalNextAmount} EUR
-        </div>
-        <div className="SimulationBasketValue">
-          {cart.cartTotalNextAmount} EUR
-        </div>
-        <div className="SimulationBasketGain">{cart.cartTotalGain} EUR</div>
       </div>
     </SimulationBasketGlobal>
   );
