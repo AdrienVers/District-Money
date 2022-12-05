@@ -18,9 +18,10 @@ type FormValues = {
 
 function LogIn() {
   const router = useRouter();
-  const { user, login } = useAuth();
+  const { login } = useAuth();
 
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const {
     register,
@@ -38,9 +39,9 @@ function LogIn() {
       await login(data.email, data.password);
       router.push("/profile");
       reset();
+      setModalOpen(false);
     } catch (err) {
-      alert("L'adresse e-mail ou mot de passe est incorrect.");
-      console.log(err);
+      setModalOpen(true);
     }
   });
 
@@ -77,7 +78,7 @@ function LogIn() {
           </LogInInputBox>
           <LogInInputBox isError={errors.password}>
             <input
-              type={passwordVisible ? "text" : "password"}
+              type={isVisible ? "text" : "password"}
               required
               {...register("password", {
                 required: "Le champ « Mot de passe » est requis.",
@@ -91,18 +92,20 @@ function LogIn() {
               name="password"
             />
             <label htmlFor="password">Mot de passe</label>
-            {passwordVisible ? (
-              <i
-                id="passwordVisible"
-                className="fa-solid fa-eye"
-                onClick={() => setPasswordVisible(!passwordVisible)}
-              />
+            {isVisible ? (
+              <button
+                className="passwordVisibleButton"
+                onClick={() => setIsVisible(!isVisible)}
+              >
+                <i className="fa-solid fa-eye" />
+              </button>
             ) : (
-              <i
-                id="passwordVisible"
-                className="fa-solid fa-eye-slash"
-                onClick={() => setPasswordVisible(!passwordVisible)}
-              />
+              <button
+                className="passwordVisibleButton"
+                onClick={() => setIsVisible(!isVisible)}
+              >
+                <i className="fa-solid fa-eye-slash" />
+              </button>
             )}
             {errors.password && (
               <p role="alert" style={{ color: "red" }}>
@@ -110,6 +113,11 @@ function LogIn() {
               </p>
             )}
           </LogInInputBox>
+          {modalOpen ? (
+            <span role="alert" style={{ color: "red" }}>
+              {"L'adresse e-mail ou mot de passe est incorrect."}
+            </span>
+          ) : null}
           <button
             className="submitButton"
             type="submit"
@@ -258,10 +266,12 @@ const LogInInputBox = styled.div<ErrorProps>`
     margin: 5px 0px 0px 0px;
   }
 
-  #passwordVisible {
+  .passwordVisibleButton {
     position: absolute;
-    top: 18px;
+    top: 17px;
     right: 12px;
+    background-color: transparent;
+    border: none;
 
     &:hover {
       cursor: pointer;

@@ -7,7 +7,7 @@ import {
   cleanup,
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import LogIn from "./LogIn";
+import LogIn, { setPasswordVisible } from "./LogIn";
 import { AuthContextProvider, useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
@@ -44,6 +44,20 @@ describe("Render LogIn Form Properly", () => {
     expect(submitButton).toBeEnabled();
   });
 
+  it("should toggle password visibility", async () => {
+    render(<LogIn />);
+
+    const passwordInput = screen.getByLabelText(/Mot de passe/i);
+    const visibilityButton = screen.getByRole("button", { name: "" });
+
+    expect(passwordInput.type).toBe("password");
+
+    fireEvent.click(visibilityButton);
+    await waitFor(() => expect(passwordInput.type).toBe("text"));
+    fireEvent.click(visibilityButton);
+    await waitFor(() => expect(passwordInput.type).toBe("password"));
+  });
+
   it("should not display error when values are valid and submit button should be enabled", async () => {
     render(<LogIn />);
 
@@ -71,6 +85,7 @@ describe("Render LogIn Form Properly", () => {
     await waitFor(() => expect(screen.queryAllByRole("alert")).toHaveLength(2));
     await waitFor(() => expect(submitButton).toBeDisabled());
   });
+
   it("should submit the form with correct values and call login function", async () => {
     render(<LogIn />);
 
