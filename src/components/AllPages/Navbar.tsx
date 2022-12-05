@@ -8,12 +8,16 @@ import { getTotals } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import useStore from "../../store/useStore";
+import { useAuth } from "../../context/AuthContext";
+// import { useRouter } from "next/router";
 
 type AnimationProps = {
   isActive: boolean;
 };
 
 function Navbar() {
+  const { user, logout } = useAuth();
+  // const router = useRouter();
   const [active, setActive] = useState(false);
   const { quantityTotal } = useStore();
 
@@ -65,12 +69,26 @@ function Navbar() {
           </div>
         </button>
       </Link>
-      <Link href="/login">
-        <button className="connexionButton">
-          <span>Me connecter </span>
-          <i className="fa-solid fa-user"></i>
-        </button>
-      </Link>
+      {user ? (
+        <Link href="/login">
+          <button
+            className="connexionButton"
+            onClick={() => {
+              logout();
+            }}
+          >
+            <span>Me déconnecter </span>
+            <i className="fa-solid fa-right-from-bracket" />
+          </button>
+        </Link>
+      ) : (
+        <Link href="/login">
+          <button className="connexionButton">
+            <span>Me connecter </span>
+            <i className="fa-solid fa-user" />
+          </button>
+        </Link>
+      )}
     </NavbarGlobal>
   );
 }

@@ -4,17 +4,22 @@ import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import LogInIllustration from "../../assets/loginform.png";
 import Link from "next/link";
+import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/router";
 
 type ErrorProps = {
   isError: FieldError | undefined;
 };
 
 type FormValues = {
-  username: string;
+  email: string;
   password: string;
 };
 
 function LogIn() {
+  const router = useRouter();
+  const { user, login } = useAuth();
+  console.log(user);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const {
@@ -27,7 +32,16 @@ function LogIn() {
   });
 
   const onSubmit = handleSubmit((data) => {
-    alert("Form submitted: " + JSON.stringify(data));
+    //alert("Form submitted: " + JSON.stringify(data));
+
+    try {
+      login(data.email, data.password);
+      router.push("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+
+    console.log(data);
     reset();
   });
 
@@ -39,25 +53,27 @@ function LogIn() {
             <h1 className="formTitle">Connexion</h1>
             <p className="formSubTitle">Accès à votre compte</p>
           </div>
-          <LogInInputBox isError={errors.username}>
+          {/* <LogInInputBox isError={errors.username}> */}
+          <LogInInputBox isError={errors.email}>
             <input
               type="text"
               required
-              {...register("username", {
-                required: "Le champ « Nom » est requis.",
+              {...register("email", {
+                required: "Le champ « Adresse e-mail » est requis.",
                 pattern: {
-                  value: /^[a-zA-Z0-9]+$/,
+                  // value: /^[a-zA-Z0-9]+$/,
+                  value: /\S+@\S+\.\S+/,
                   message:
-                    "Le nom ne doit pas contenir de caractères spéciaux.",
+                    "L'adresse e-mail ne doit pas contenir de caractères spéciaux.",
                 },
               })}
-              id="username"
-              name="username"
+              id="email"
+              name="email"
             />
-            <label htmlFor="username">{"Nom d'utilisateur"}</label>
-            {errors.username ? (
+            <label htmlFor="email">{"Adresse e-mail"}</label>
+            {errors.email ? (
               <p role="alert" style={{ color: "red" }}>
-                {errors.username.message}
+                {errors.email.message}
               </p>
             ) : null}
           </LogInInputBox>
@@ -99,7 +115,7 @@ function LogIn() {
           <button
             className="submitButton"
             type="submit"
-            disabled={!errors.password && !errors.username ? false : true}
+            disabled={!errors.password && !errors.email ? false : true}
           >
             Se connecter
           </button>

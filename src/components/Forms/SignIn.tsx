@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import LogInIllustration from "../../assets/signinform.jpg";
 import Link from "next/link";
+import { useAuth } from "../../context/AuthContext";
 
 type ErrorProps = {
   isError: FieldError | undefined;
@@ -17,6 +18,9 @@ type FormValues = {
 };
 
 function SignIn() {
+  const { user, signup } = useAuth();
+  console.log(user);
+
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [confirmationVisible, setConfirmationVisible] =
     useState<boolean>(false);
@@ -31,7 +35,15 @@ function SignIn() {
   });
 
   const onSubmit = handleSubmit((data) => {
-    alert("Form submitted: " + JSON.stringify(data));
+    //alert("Form submitted: " + JSON.stringify(data));
+
+    try {
+      signup(data.email, data.password);
+    } catch (err) {
+      console.log(err);
+    }
+
+    console.log(data);
     reset();
   });
 
