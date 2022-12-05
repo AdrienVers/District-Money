@@ -17,7 +17,7 @@ type FormValues = {
   confirmation: string;
 };
 
-function SignIn() {
+function SignUp() {
   const { user, signup } = useAuth();
   console.log(user);
 
@@ -48,14 +48,14 @@ function SignIn() {
   });
 
   return (
-    <SignInGlobal>
-      <div className="SignInContainer">
-        <SignInForm onSubmit={onSubmit}>
+    <SignUpGlobal>
+      <div className="SignUpContainer">
+        <SignUpForm onSubmit={onSubmit}>
           <div className="titleBox">
             <h1 className="formTitle">Inscription</h1>
             <p className="formSubTitle">Création de votre compte</p>
           </div>
-          <SignInInputBox isError={errors.username}>
+          <SignUpInputBox isError={errors.username}>
             <input
               type="text"
               required
@@ -76,8 +76,8 @@ function SignIn() {
                 {errors.username.message}
               </p>
             ) : null}
-          </SignInInputBox>
-          <SignInInputBox isError={errors.email}>
+          </SignUpInputBox>
+          <SignUpInputBox isError={errors.email}>
             <input
               type="text"
               required
@@ -98,8 +98,8 @@ function SignIn() {
                 {errors.email.message}
               </p>
             ) : null}
-          </SignInInputBox>
-          <SignInInputBox isError={errors.password}>
+          </SignUpInputBox>
+          <SignUpInputBox isError={errors.password}>
             <input
               type={passwordVisible ? "text" : "password"}
               required
@@ -133,8 +133,8 @@ function SignIn() {
                 {errors.password.message}
               </p>
             )}
-          </SignInInputBox>
-          <SignInInputBox isError={errors.confirmation}>
+          </SignUpInputBox>
+          <SignUpInputBox isError={errors.confirmation}>
             <input
               type={confirmationVisible ? "text" : "password"}
               required
@@ -168,7 +168,7 @@ function SignIn() {
                 {errors.confirmation.message}
               </p>
             )}
-          </SignInInputBox>
+          </SignUpInputBox>
           <button
             className="submitButton"
             type="submit"
@@ -189,18 +189,18 @@ function SignIn() {
               Se connecter.
             </Link>
           </div>
-        </SignInForm>
-        <SignInImage>
+        </SignUpForm>
+        <SignUpImage>
           <Image id="Image" src={LogInIllustration} alt="Connexion" />
-        </SignInImage>
+        </SignUpImage>
       </div>
-    </SignInGlobal>
+    </SignUpGlobal>
   );
 }
 
-export default SignIn;
+export default SignUp;
 
-const SignInGlobal = styled.div`
+const SignUpGlobal = styled.div`
   padding: 50px;
   display: flex;
   align-items: center;
@@ -211,7 +211,7 @@ const SignInGlobal = styled.div`
     padding: 30px 20px;
   }
 
-  .SignInContainer {
+  .SignUpContainer {
     width: 100%;
     display: flex;
     background-color: white;
@@ -227,7 +227,7 @@ const SignInGlobal = styled.div`
   }
 `;
 
-const SignInForm = styled.form`
+const SignUpForm = styled.form`
   width: 50%;
   padding: 40px 0px;
   display: flex;
@@ -281,7 +281,7 @@ const SignInForm = styled.form`
   }
 `;
 
-const SignInInputBox = styled.div<ErrorProps>`
+const SignUpInputBox = styled.div<ErrorProps>`
   position: relative;
   width: 400px;
 
@@ -335,7 +335,7 @@ const SignInInputBox = styled.div<ErrorProps>`
   }
 `;
 
-const SignInImage = styled.div`
+const SignUpImage = styled.div`
   width: 50%;
   display: flex;
   justify-content: center;

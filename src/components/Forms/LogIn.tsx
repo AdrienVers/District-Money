@@ -19,7 +19,7 @@ type FormValues = {
 function LogIn() {
   const router = useRouter();
   const { user, login } = useAuth();
-  console.log(user);
+
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const {
@@ -31,18 +31,17 @@ function LogIn() {
     mode: "onChange",
   });
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     //alert("Form submitted: " + JSON.stringify(data));
 
     try {
-      login(data.email, data.password);
+      await login(data.email, data.password);
       router.push("/profile");
+      reset();
     } catch (err) {
+      alert("L'adresse e-mail ou mot de passe est incorrect.");
       console.log(err);
     }
-
-    console.log(data);
-    reset();
   });
 
   return (
@@ -53,7 +52,6 @@ function LogIn() {
             <h1 className="formTitle">Connexion</h1>
             <p className="formSubTitle">Accès à votre compte</p>
           </div>
-          {/* <LogInInputBox isError={errors.username}> */}
           <LogInInputBox isError={errors.email}>
             <input
               type="text"
@@ -64,7 +62,7 @@ function LogIn() {
                   // value: /^[a-zA-Z0-9]+$/,
                   value: /\S+@\S+\.\S+/,
                   message:
-                    "L'adresse e-mail ne doit pas contenir de caractères spéciaux.",
+                    "L'adresse e-mail doit avoir un format valide de type : abc@exemple.com.",
                 },
               })}
               id="email"
@@ -123,7 +121,7 @@ function LogIn() {
             Pas encore de compte ?{" "}
             <Link
               style={{ color: "rgb(30,60,130)", fontWeight: "620" }}
-              href="/signin"
+              href="/signup"
             >
               {"S'inscrire."}
             </Link>

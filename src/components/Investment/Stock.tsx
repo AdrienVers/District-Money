@@ -311,6 +311,10 @@ const SimulationStockGlobal = styled.div`
         color: rgb(230, 230, 230);
         margin-right: 10px;
         cursor: not-allowed;
+
+        @media (max-width: 600px) {
+          margin-right: 0px;
+        }
       }
 
       .SaleButtonNotAllowed {
