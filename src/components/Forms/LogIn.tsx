@@ -114,7 +114,7 @@ function LogIn() {
             )}
           </LogInInputBox>
           {modalOpen ? (
-            <span role="alert" style={{ color: "red" }}>
+            <span role="alert" style={{ color: "red", textAlign: "center" }}>
               {"L'adresse e-mail ou mot de passe est incorrect."}
             </span>
           ) : null}

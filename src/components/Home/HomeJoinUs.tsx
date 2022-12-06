@@ -42,7 +42,7 @@ function HomeJoinUs() {
           </p>
         </div>
         <div className="HomeJoinUsImage">
-          <Image id="Image" src={MakeMoney} alt="make-money" />
+          <Image priority id="Image" src={MakeMoney} alt="make-money" />
         </div>
       </div>
     </HomeJoinUsGlobal>

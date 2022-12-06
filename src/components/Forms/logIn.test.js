@@ -7,7 +7,7 @@ import {
   cleanup,
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import LogIn, { setPasswordVisible } from "./LogIn";
+import LogIn from "./LogIn";
 import { AuthContextProvider, useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
@@ -25,7 +25,7 @@ jest.mock("next/router", () => ({
   }),
 }));
 
-describe("Render LogIn Form Properly", () => {
+describe("Render the Login component correctly", () => {
   beforeEach(cleanup);
 
   test("email and password inputs should be empty at the beginning and submit button should be normal", () => {

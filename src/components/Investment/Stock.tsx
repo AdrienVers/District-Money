@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { STOCKS_TITLE_DATA } from "../../datas/stocksData";
-import useStore, { Stock } from "../../store/useStore";
+import { useStore, Stock } from "../../store/useStore";
 import Image from "next/image";
+import { getStocks } from "./getStocks";
 
 function SimulationStock() {
   const {
@@ -17,28 +18,32 @@ function SimulationStock() {
     updateNextPriceTotal,
   } = useStore();
   const store = useStore();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
+  /*
   const fetchStocks = async () => {
-    setIsLoading(true);
-
-    try {
-      await fetch("https://district-money-backend.vercel.app/")
-        .then((resp) => resp.json())
-        .then((items: Stock[]) => store.setStocks(items));
-    } catch (error) {
-      console.error(error);
-    }
+    await fetch("https://district-money-backend.vercel.app/")
+      .then((resp) => resp.json())
+      .then((items: Stock[]) => store.setStocks(items));
     setIsLoading(false);
   };
+  */
+
+  const fetchStocks = async () =>
+    getStocks()
+      .then((items) => store.setStocks(items.results))
+      .catch((e) => setError(true));
 
   useEffect(() => {
     fetchStocks();
   }, []);
 
+  /*
   if (isLoading) {
     return <p>Chargement en cours...</p>;
   }
+  */
 
   const addToCart = (item: any) => {
     addToBasket({
@@ -97,55 +102,63 @@ function SimulationStock() {
           </div>
         );
       })}
-      {store.stocks.map((item) => {
-        return (
-          <div key={item.id} className="SimulationStockItem">
-            <div className="SimulationStockLogo">
-              <Image
-                className="Logo"
-                src={item.logo}
-                width="200"
-                height="65"
-                alt={item.name}
-              />
-            </div>
-            <div className="SimulationStockTitle">{item.name}</div>
-            <div className="SimulationStockValue">{item.price} EUR</div>
-            <div className="SimulationStockMarket">{item.market}</div>
-            <div className="SimulationStockSector">{item.sector}</div>
-            <div className="SimulationStockButtons">
-              <button
-                onClick={() => {
-                  decreaseCash(item.price);
-                  addToCart(item);
-                  updateQuantityTotal();
-                  updatePriceTotal();
-                  updateNextPriceTotal();
-                }}
-                className={
-                  cash - item.price > 0 ? "BuyButton" : "BuyButtonNotAllowed"
-                }
-                disabled={cash - item.price > 0 ? false : true}
-              >
-                Achat
-              </button>
-              <button
-                onClick={() => {
-                  increaseCash(item.nextPrice);
-                  removeFromCart(item);
-                  updateQuantityTotal();
-                  updatePriceTotal();
-                  updateNextPriceTotal();
-                }}
-                className={availableForSaleStyle(item)}
-                disabled={availableForSale(item)}
-              >
-                Vente
-              </button>
-            </div>
-          </div>
-        );
-      })}
+      {error ? (
+        <p>Impossible de récupérer les données.</p>
+      ) : (
+        <div>
+          {store.stocks.map((item, index) => {
+            return (
+              <div key={index} className="SimulationStockItem">
+                <div className="SimulationStockLogo">
+                  <Image
+                    className="Logo"
+                    src={item.logo}
+                    width={200}
+                    height={65}
+                    alt={item.name}
+                  />
+                </div>
+                <div className="SimulationStockTitle">{item.name}</div>
+                <div className="SimulationStockValue">{item.price} EUR</div>
+                <div className="SimulationStockMarket">{item.market}</div>
+                <div className="SimulationStockSector">{item.sector}</div>
+                <div className="SimulationStockButtons">
+                  <button
+                    onClick={() => {
+                      decreaseCash(item.price);
+                      addToCart(item);
+                      updateQuantityTotal();
+                      updatePriceTotal();
+                      updateNextPriceTotal();
+                    }}
+                    className={
+                      cash - item.price > 0
+                        ? "BuyButton"
+                        : "BuyButtonNotAllowed"
+                    }
+                    disabled={cash - item.price > 0 ? false : true}
+                  >
+                    Achat
+                  </button>
+                  <button
+                    onClick={() => {
+                      increaseCash(item.nextPrice);
+                      removeFromCart(item);
+                      updateQuantityTotal();
+                      updatePriceTotal();
+                      updateNextPriceTotal();
+                    }}
+                    className={availableForSaleStyle(item)}
+                    disabled={availableForSale(item)}
+                  >
+                    Vente
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </SimulationStockGlobal>
   );
 }
