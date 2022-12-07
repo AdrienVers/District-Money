@@ -102,7 +102,7 @@ export const useStore = create<Store>()(
       set((state) => {
         let total = 0;
         state.basket.forEach((item) => {
-          total += item.price;
+          total += item.price * item.quantity;
         });
         return {
           ...state,
@@ -116,7 +116,7 @@ export const useStore = create<Store>()(
       set((state) => {
         let total = 0;
         state.basket.forEach((item) => {
-          total += item.nextPrice;
+          total += item.nextPrice * item.quantity;
         });
         return {
           ...state,

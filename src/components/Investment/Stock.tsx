@@ -18,17 +18,7 @@ function SimulationStock() {
     updateNextPriceTotal,
   } = useStore();
   const store = useStore();
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  /*
-  const fetchStocks = async () => {
-    await fetch("https://district-money-backend.vercel.app/")
-      .then((resp) => resp.json())
-      .then((items: Stock[]) => store.setStocks(items));
-    setIsLoading(false);
-  };
-  */
 
   const fetchStocks = async () =>
     getStocks()
@@ -38,12 +28,6 @@ function SimulationStock() {
   useEffect(() => {
     fetchStocks();
   }, []);
-
-  /*
-  if (isLoading) {
-    return <p>Chargement en cours...</p>;
-  }
-  */
 
   const addToCart = (item: any) => {
     addToBasket({

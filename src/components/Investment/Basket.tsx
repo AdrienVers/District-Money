@@ -24,7 +24,7 @@ function SimulationBasket() {
               {item.initialPrice}
             </div>
             <div className="SimulationBasketRate">{item.rate}</div>
-            <div className="SimulationBasketValue">{item.value}</div>
+            {/* <div className="SimulationBasketValue">{item.value}</div> */}
             <div className="SimulationBasketGain">{item.gain}</div>
           </div>
         );
@@ -40,9 +40,11 @@ function SimulationBasket() {
             <div className="SimulationBasketRate">
               {item.nextPrice * item.quantity} EUR
             </div>
+            {/*  
             <div className="SimulationBasketValue">
               {item.nextPrice * item.quantity} EUR
             </div>
+            */}
             <div className="SimulationBasketGain">
               {item.nextPrice * item.quantity - item.price * item.quantity} EUR
             </div>
@@ -56,7 +58,7 @@ function SimulationBasket() {
         <div className="SimulationBasketQuantity">{quantityTotal}</div>
         <div className="SimulationBasketInitialPrice">{priceTotal} EUR</div>
         <div className="SimulationBasketRate">{nextPriceTotal} EUR</div>
-        <div className="SimulationBasketValue">{nextPriceTotal} EUR</div>
+        {/* <div className="SimulationBasketValue">{nextPriceTotal} EUR</div> */}
         <div className="SimulationBasketGain">
           {nextPriceTotal - priceTotal} EUR
         </div>
@@ -100,7 +102,7 @@ const SimulationBasketGlobal = styled.div`
     }
 
     .SimulationBasketTitle {
-      width: 20%;
+      width: 25%;
       display: flex;
       justify-content: center;
     }
@@ -112,13 +114,13 @@ const SimulationBasketGlobal = styled.div`
     }
 
     .SimulationBasketInitialPrice {
-      width: 15%;
+      width: 20%;
       display: flex;
       justify-content: center;
     }
 
     .SimulationBasketRate {
-      width: 20%;
+      width: 25%;
       display: flex;
       justify-content: center;
     }
@@ -130,7 +132,7 @@ const SimulationBasketGlobal = styled.div`
     }
 
     .SimulationBasketGain {
-      width: 20%;
+      width: 25%;
       display: flex;
       justify-content: center;
     }
