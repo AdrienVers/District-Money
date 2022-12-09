@@ -12,7 +12,7 @@ function SimulationBasket() {
       <h2 style={{ margin: "5px 0px 10px 0px" }}>
         Portefeuille (2 jours après achat) :
       </h2>
-      <p>
+      <p style={{margin : "0px 0px 8px 5px"}}>
         Votre solde en espèce : <strong>{cash} EUR</strong>.
       </p>
       {BASKET_TITLE_DATA.map((item) => {

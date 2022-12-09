@@ -4,12 +4,8 @@ import Image from "next/image";
 import Logo from "../../assets/logo.png";
 import Link from "next/link";
 import { NAVBAR_DATA } from "../../datas/navbarData";
-import { getTotals } from "../../redux/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import useStore from "../../store/useStore";
 import { useAuth } from "../../context/AuthContext";
-// import { useRouter } from "next/router";
 
 type AnimationProps = {
   isActive: boolean;
@@ -17,7 +13,6 @@ type AnimationProps = {
 
 function Navbar() {
   const { user, logout } = useAuth();
-  // const router = useRouter();
   const [active, setActive] = useState(false);
   const { quantityTotal } = useStore();
 
@@ -117,6 +112,26 @@ const NavbarGlobal = styled.div`
   }
 
   .TextLink {
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -6.5px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 1.5px;
+      transform: scaleY(0);
+      background-color: rgb(30, 50, 130);
+
+      transition: transform 0.3s;
+    }
+    &:hover {
+      &:after {
+        transform: scaleY(1);
+      }
+    }
+
     @media (max-width: 900px) {
       display: none;
     }
@@ -126,7 +141,6 @@ const NavbarGlobal = styled.div`
     padding: 10px 15px 10px 15px;
     height: 45px;
     font-size: 1.05rem;
-    // background-color: rgb(78, 114, 227);
     background-color: rgb(30, 50, 130);
     color: white;
     border: none;
@@ -135,6 +149,15 @@ const NavbarGlobal = styled.div`
 
     &:hover {
       cursor: pointer;
+      background-color: white;
+      color: rgb(30, 50, 130);
+      box-shadow: inset 0px 0px 0px 1.5px rgb(30, 50, 130);
+      transition: all 0.3s;
+
+      i {
+        color: rgb(30, 50, 130);
+        transition: all 0.3s;
+      }
     }
 
     i {

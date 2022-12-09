@@ -5,6 +5,7 @@ import Footer from "../components/AllPages/Footer";
 import { AuthContextProvider } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import ProtectedPage from "../components/AllPages/ProtectedPage";
+import HomeNews from "../components/Home/HomeNews";
 
 const noAuthRequired = [
   "/",
@@ -23,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>
       <Navbar />
+      <HomeNews />
       {noAuthRequired.includes(router.pathname) ? (
         <Component {...pageProps} />
       ) : (

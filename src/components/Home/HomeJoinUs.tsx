@@ -81,6 +81,7 @@ const HomeJoinUsGlobal = styled.div`
 
         @media (max-width: 500px) {
           padding: 0;
+          font-size: 1.9rem;
         }
 
         @media (max-width: 300px) {
@@ -118,11 +119,26 @@ const HomeJoinUsGlobal = styled.div`
         .quizzButton {
           background-color: white;
           color: black;
+
+          &:hover {
+            cursor: pointer;
+            background-color: white;
+            color: rgb(30, 50, 130);
+            box-shadow: inset 0px 0px 0px 0.5px rgb(30, 50, 130);
+            transition: all 0.3s;
+          }
         }
 
         .loginButton {
           background-color: rgb(10, 20, 100);
           color: white;
+          &:hover {
+            cursor: pointer;
+            background-color: white;
+            color: rgb(30, 50, 130);
+            box-shadow: inset 0px 0px 0px 0.5px rgb(30, 50, 130);
+            transition: all 0.3s;
+          }
         }
       }
     }

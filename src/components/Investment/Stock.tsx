@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { STOCKS_TITLE_DATA } from "../../datas/stocksData";
-import { useStore, Stock } from "../../store/useStore";
+import { useStore } from "../../store/useStore";
 import Image from "next/image";
 import { getStocks } from "./getStocks";
 
@@ -288,9 +288,14 @@ const SimulationStockGlobal = styled.div`
       }
 
       .BuyButton {
-        background-color: rgb(0, 170, 0);
+        background-color: rgb(0, 190, 0);
         margin-right: 10px;
         cursor: pointer;
+
+        &:hover {
+          box-shadow: 0px 0px 0px 0.8px black;
+          background-color: rgb(0, 170, 0);
+        }
 
         @media (max-width: 600px) {
           margin-right: 0px;
@@ -298,9 +303,14 @@ const SimulationStockGlobal = styled.div`
       }
 
       .SaleButton {
-        background-color: rgb(240, 30, 60);
+        background-color: rgb(220, 0, 0);
         margin-left: 10px;
         cursor: pointer;
+
+        &:hover {
+          box-shadow: 0px 0px 0px 0.8px black;
+          background-color: rgb(180, 30, 30);
+        }
       }
 
       .BuyButtonNotAllowed {
