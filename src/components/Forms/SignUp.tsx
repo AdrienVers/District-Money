@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
@@ -35,7 +35,6 @@ function SignUp() {
   });
 
   const onSubmit = handleSubmit((data) => {
-    //alert("Form submitted: " + JSON.stringify(data));
 
     try {
       signup(data.email, data.password);

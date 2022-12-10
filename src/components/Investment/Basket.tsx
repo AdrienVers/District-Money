@@ -12,7 +12,7 @@ function SimulationBasket() {
       <h2 style={{ margin: "5px 0px 10px 0px" }}>
         Portefeuille (2 jours après achat) :
       </h2>
-      <p style={{margin : "0px 0px 8px 5px"}}>
+      <p style={{ margin: "0px 0px 8px 5px" }}>
         Votre solde en espèce : <strong>{cash} EUR</strong>.
       </p>
       {BASKET_TITLE_DATA.map((item) => {
@@ -24,7 +24,6 @@ function SimulationBasket() {
               {item.initialPrice}
             </div>
             <div className="SimulationBasketRate">{item.rate}</div>
-            {/* <div className="SimulationBasketValue">{item.value}</div> */}
             <div className="SimulationBasketGain">{item.gain}</div>
           </div>
         );
@@ -33,18 +32,15 @@ function SimulationBasket() {
         return (
           <div key={item.id} className="SimulationBasketItem">
             <div className="SimulationBasketTitle">{item.name}</div>
-            <div className="SimulationBasketQuantity">{item.quantity}</div>
+            <div id="quantity" className="SimulationBasketQuantity">
+              {item.quantity}
+            </div>
             <div className="SimulationBasketInitialPrice">
               {item.price * item.quantity} EUR
             </div>
             <div className="SimulationBasketRate">
               {item.nextPrice * item.quantity} EUR
             </div>
-            {/*  
-            <div className="SimulationBasketValue">
-              {item.nextPrice * item.quantity} EUR
-            </div>
-            */}
             <div className="SimulationBasketGain">
               {item.nextPrice * item.quantity - item.price * item.quantity} EUR
             </div>
@@ -55,10 +51,11 @@ function SimulationBasket() {
         <div style={{ fontWeight: "500" }} className="SimulationBasketTitle">
           SOMME TOTALE
         </div>
-        <div className="SimulationBasketQuantity">{quantityTotal}</div>
+        <div id="totalQuantity" className="SimulationBasketQuantity">
+          {quantityTotal}
+        </div>
         <div className="SimulationBasketInitialPrice">{priceTotal} EUR</div>
         <div className="SimulationBasketRate">{nextPriceTotal} EUR</div>
-        {/* <div className="SimulationBasketValue">{nextPriceTotal} EUR</div> */}
         <div className="SimulationBasketGain">
           {nextPriceTotal - priceTotal} EUR
         </div>

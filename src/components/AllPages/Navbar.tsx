@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Logo from "../../assets/logo.png";

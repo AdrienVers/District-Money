@@ -88,7 +88,7 @@ const SectorsGlobal = styled.div`
 
     .SectorsText {
       width: 70%;
-    //   background-color: gold;
+      //   background-color: gold;
       padding: 20px;
 
       @media (max-width: 500px) {

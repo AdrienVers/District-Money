@@ -33,8 +33,7 @@ function LogIn() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    //alert("Form submitted: " + JSON.stringify(data));
-
+    
     try {
       await login(data.email, data.password);
       router.push("/profile");
