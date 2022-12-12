@@ -1,9 +1,10 @@
 import Head from "next/head";
 import React from "react";
 import styled from "@emotion/styled";
+import Initiation from "../components/Bourse/Initiation";
 
 const BourseGlobal = styled.div`
-  //background-color: rgb(10, 20, 100);
+  background-color: rgb(10, 20, 100);
 `;
 
 function bourse() {
@@ -20,7 +21,7 @@ function bourse() {
         />
         <link rel="icon" href="/icon.png" />
       </Head>
-      Bourse
+      <Initiation />
     </BourseGlobal>
   );
 }

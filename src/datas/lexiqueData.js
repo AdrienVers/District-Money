@@ -15,6 +15,11 @@ export const LEXIQUE_DATA = [
       "La blockchain est une technologie de stockage et de transmission d'informations, transparente, sécurisée, et fonctionnant sans organe central de contrôle.",
   },
   {
+    name: "Broker",
+    definition:
+      "Un broker (également appelé courtier) est un intermédiaire financier en charge d'exécuter nos ordres d'achat ou de ventes d'actifs en Bourse et par lequel on doit obligatoirement passer pour gérer nos placements. Tout courtier en ligne est soumis aux mêmes exigences qu'une banque, et se doit de vous proposer de vraies garanties.",
+  },
+  {
     name: "Cryptomonnaie",
     definition:
       "La cryptomonnaie est monnaie existant sous forme  virtuelle et utilisant la cryptographie pour sécuriser les transactions.",
@@ -69,7 +74,7 @@ export const LEXIQUE_DATA = [
   },
   {
     name: "PEA (Plan d'épargne en action)",
-    definition: "",
+    definition: "Il n'est pas possible d'avoir plus d'un PEA par personne.",
     tag: "Compte",
   },
   {
