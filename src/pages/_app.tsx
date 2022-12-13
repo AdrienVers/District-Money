@@ -15,7 +15,6 @@ const noAuthRequired = [
   "/secteurs",
   "/login",
   "/signup",
-  "/profile",
 ];
 
 export default function App({ Component, pageProps }: AppProps) {

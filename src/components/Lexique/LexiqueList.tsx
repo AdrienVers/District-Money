@@ -29,7 +29,7 @@ function LexiqueList() {
         </div>
         <div className="lexiqueList">
           {LEXIQUE_DATA.filter((item) => {
-            return item.name.includes(searchTerm);
+            return item.name.toLowerCase().includes(searchTerm.toLowerCase());
           }).map((item, index) => {
             return (
               <div key={index}>
