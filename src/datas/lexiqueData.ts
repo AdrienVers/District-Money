@@ -1,4 +1,14 @@
-export const LEXIQUE_DATA = [
+export interface LexiqueData {
+  name: string;
+  definition: string;
+  tag: string;
+}
+
+export interface LexiqueTags {
+  tag: string;
+}
+
+export const LEXIQUE_DATA: LexiqueData[] = [
   {
     name: "Action",
     definition:
@@ -57,7 +67,7 @@ export const LEXIQUE_DATA = [
     name: "ETF (Exchange traded funds ou Trackers)",
     definition:
       "Instrument financier destiné à répliquer fidèlement les variations d'un indice (CAC 40, FTSE 100, etc.), à la hausse comme à la baisse. Lorsque vous achetez des parts d'un ETF, vous devenez actionnaire de ce fonds, et vous avez droit à une partie des bénéfices (comme de potentiels dividendes).",
-    tag: "Produit financier.",
+    tag: "Produit financier",
   },
   {
     name: "Indice",
@@ -148,5 +158,35 @@ export const LEXIQUE_DATA = [
     definition:
       "Produit dérivé complexe ayant le caractère d'une option et proposé par un établissement financier spécialisé. Les warrants sont principalement liés à des actions ou indices boursiers (tandis que les options peuvent être plus générales avec des actions, indices, devises, taux d'intérêt, etc.).",
     tag: "Produit financier",
+  },
+];
+
+export const LEXIQUE_TAGS: LexiqueTags[] = [
+  {
+    tag: "Tous",
+  },
+  {
+    tag: "Réglementation",
+  },
+  {
+    tag: "Produit financier",
+  },
+  {
+    tag: "Gestion des investissements",
+  },
+  {
+    tag: "Technologie financière",
+  },
+  {
+    tag: "Indicateur",
+  },
+  {
+    tag: "Rendement financier",
+  },
+  {
+    tag: "Courtage",
+  },
+  {
+    tag: "Compte",
   },
 ];

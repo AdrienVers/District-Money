@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "@emotion/styled";
 import { LEXIQUE_DATA } from "../../datas/lexiqueData";
+import Tagsbar from "./Tagsbar";
+import { useTags } from "../../store/useTags";
 
 function LexiqueList() {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const { tag } = useTags();
 
   const handleSearchTerm = (e: any) => {
     let value = e.target.value;
     setSearchTerm(value);
   };
-
-  console.log(searchTerm);
 
   return (
     <LexiqueListGlobal>
@@ -27,19 +28,39 @@ function LexiqueList() {
             <i className="fa fa-search" />
           </button>
         </div>
+        <Tagsbar />
         <div className="lexiqueList">
-          {LEXIQUE_DATA.filter((item) => {
-            return item.name.toLowerCase().includes(searchTerm.toLowerCase());
-          }).map((item, index) => {
-            return (
-              <div key={index}>
-                <p>
-                  <span style={{ fontWeight: "500" }}>{item.name}</span> :{" "}
-                  {item.definition}
-                </p>
-              </div>
-            );
-          })}
+          {tag === "Tous"
+            ? LEXIQUE_DATA.filter((item) => {
+                return item.name
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase());
+              }).map((item, index) => {
+                return (
+                  <div key={index}>
+                    <p>
+                      <span style={{ fontWeight: "500" }}>{item.name}</span> :{" "}
+                      {item.definition}
+                    </p>
+                  </div>
+                );
+              })
+            : LEXIQUE_DATA.filter((item) => item.tag === tag)
+                .filter((item) => {
+                  return item.name
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase());
+                })
+                .map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <p>
+                        <span style={{ fontWeight: "500" }}>{item.name}</span> :{" "}
+                        {item.definition}
+                      </p>
+                    </div>
+                  );
+                })}
         </div>
       </div>
     </LexiqueListGlobal>
