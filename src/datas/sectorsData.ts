@@ -8,8 +8,19 @@ import Technologie from "../assets/Technologie.png";
 import Service from "../assets/Service.png";
 import Energie from "../assets/Energie.png";
 import Materiaux from "../assets/Materiaux.png";
+import { StaticImageData } from "next/image";
 
-export const SECTORS_DATA = [
+interface SectorsData {
+  id: number;
+  name: string;
+  en: string;
+  categories: string;
+  description: string;
+  influence: string;
+  img: StaticImageData;
+}
+
+export const SECTORS_DATA: SectorsData[] = [
   {
     id: 1,
     name: "Produits industriels",

@@ -21,6 +21,7 @@ function Navbar() {
       {active ? (
         <i
           id="menuButton"
+          role="sidebarButton"
           className="fa-solid fa-xmark"
           onClick={() => setActive(!active)}
         />

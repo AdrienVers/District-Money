@@ -1,10 +1,10 @@
-export interface LexiqueData {
+interface LexiqueData {
   name: string;
   definition: string;
   tag: string;
 }
 
-export interface LexiqueTags {
+interface LexiqueTags {
   tag: string;
 }
 

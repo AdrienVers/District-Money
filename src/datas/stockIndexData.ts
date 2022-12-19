@@ -10,8 +10,18 @@ import Cn from "../assets/cn.png";
 import Hk from "../assets/hk.png";
 import Ru from "../assets/ru.png";
 import Eu from "../assets/eu.png";
+import { StaticImageData } from "next/image";
 
-export const STOCK_INDEX_DATA = [
+interface StockIndexData {
+  id: number;
+  name: string;
+  flag: StaticImageData;
+  points: string;
+  percent: string;
+  state: string;
+}
+
+export const STOCK_INDEX_DATA: StockIndexData[] = [
   {
     id: 1,
     name: "STOXX 50",
