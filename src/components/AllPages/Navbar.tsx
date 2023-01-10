@@ -215,6 +215,7 @@ const NavbarGlobal = styled.div`
   #menuButton {
     display: none;
     font-size: 1.5rem;
+    color: black;
 
     @media (max-width: 900px) {
       display: flex;
