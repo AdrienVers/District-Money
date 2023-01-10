@@ -40,5 +40,6 @@ const LexiqueLayoutGlobal = styled.div`
     h1 {
       font-weight: normal;
       margin: 0px 8px 25px 8px;
+      color : black;
     }
 `;

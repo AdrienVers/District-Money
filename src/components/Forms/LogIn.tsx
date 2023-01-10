@@ -196,6 +196,7 @@ const LogInForm = styled.form`
       font-weight: normal;
       margin: 0;
       padding: 0;
+      color: black;
     }
 
     .formSubTitle {

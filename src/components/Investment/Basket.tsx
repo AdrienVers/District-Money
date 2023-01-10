@@ -85,6 +85,15 @@ const SimulationBasketGlobal = styled.div`
   }
 
   .SimulationBasketItem,
+  .SimulationBasketItemResume {
+    color: black;
+  }
+
+  .SimulationBasketItemTitles {
+    color: white;
+  }
+
+  .SimulationBasketItem,
   .SimulationBasketItemTitles,
   .SimulationBasketItemResume {
     display: flex;

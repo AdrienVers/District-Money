@@ -35,7 +35,6 @@ function SignUp() {
   });
 
   const onSubmit = handleSubmit((data) => {
-
     try {
       signup(data.email, data.password);
     } catch (err) {
@@ -223,6 +222,7 @@ const SignUpGlobal = styled.div`
   .GoToLogin {
     text-align: center;
     padding: 0px 10px;
+    color: black;
   }
 `;
 
@@ -254,6 +254,7 @@ const SignUpForm = styled.form`
       font-weight: normal;
       margin: 0;
       padding: 0;
+      color: black;
     }
 
     .formSubTitle {

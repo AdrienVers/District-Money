@@ -53,6 +53,10 @@ const HomeNewsGlobal = styled.div`
   align-items: center;
   border-top: 0.2px solid rgb(150, 150, 150);
 
+  span {
+    color: black;
+  }
+
   .slide-track {
     display: flex;
     animation: scroll 40s linear infinite;

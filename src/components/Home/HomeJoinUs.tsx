@@ -78,6 +78,7 @@ const HomeJoinUsGlobal = styled.div`
       h1 {
         font-weight: normal;
         padding-right: 100px;
+        color: black;
 
         @media (max-width: 500px) {
           padding: 0;
@@ -91,6 +92,7 @@ const HomeJoinUsGlobal = styled.div`
 
       p {
         font-size: 1.2rem;
+        color: black;
       }
 
       .HomeJoinUsButtons {

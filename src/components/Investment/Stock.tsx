@@ -155,9 +155,19 @@ const SimulationStockGlobal = styled.div`
 
   h2 {
     padding-left: 10px;
+    color: black;
+
     @media (max-width: 600px) {
       font-size: 1.2rem;
     }
+  }
+
+  .SimulationStockItemTitles {
+    color: white;
+  }
+
+  .SimulationStockItem {
+    color: black;
   }
 
   .SimulationStockItem,

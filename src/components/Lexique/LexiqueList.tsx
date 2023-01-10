@@ -52,6 +52,7 @@ const LexiqueListGlobal = styled.div`
     p {
       border-top: 0.2px black solid;
       padding: 25px 0px 10px 5px;
+      color: black;
     }
   }
 `;

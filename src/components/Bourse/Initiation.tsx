@@ -92,10 +92,12 @@ const InitiationGlobal = styled.div`
     h2 {
       font-weight: 600;
       font-size: 1.65rem;
+      color: black;
     }
 
     p {
       font-size: 1.05rem;
+      color: black;
     }
 
     #ImageInflation {

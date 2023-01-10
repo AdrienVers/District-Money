@@ -87,6 +87,11 @@ const HomeAboutGlobal = styled.div`
 
       h2 {
         text-align: center;
+        color: black;
+      }
+
+      p {
+        color: black;
       }
 
       #Image {
