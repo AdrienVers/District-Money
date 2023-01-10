@@ -33,7 +33,6 @@ function LogIn() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    
     try {
       await login(data.email, data.password);
       router.push("/profile");
@@ -167,6 +166,7 @@ const LogInGlobal = styled.div`
 
   .GoToSignin {
     text-align: center;
+    color: black;
   }
 `;
 

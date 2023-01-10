@@ -180,27 +180,6 @@ const NavbarGlobal = styled.div`
     }
   }
 
-  /*
-  .lightButton {
-    border-radius: 50px;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    font-size: 0.8rem;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    color: black;
-    box-shadow: inset 0px 0px 0px 1px black;
-
-    &:hover {
-      cursor: pointer;
-      background-color: black;
-      color: white;
-    }
-  }
-  */
-
   .demoButton {
     position: relative;
     @media (max-width: 520px) {

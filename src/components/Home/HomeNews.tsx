@@ -35,11 +35,9 @@ export default HomeNews;
 
 const scroll = keyframes`
   0% {
-      -webkit-transform: translateX(0);
       transform: translateX(0);
   }
   100% {
-      -webkit-transform: translateX(calc(-200px * 7));
       transform: translateX(calc(-200px * 7));
   }
   `;
