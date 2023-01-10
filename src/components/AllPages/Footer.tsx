@@ -62,6 +62,14 @@ const FooterGlobal = styled.div`
   display: flex;
   flex-direction: column;
   bottom: 0;
+
+  h3 {
+    color: black;
+  }
+
+  p {
+    color: black;
+  }
 `;
 
 const FooterLinks = styled.div`

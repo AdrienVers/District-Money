@@ -32,6 +32,10 @@ const SectorsGlobal = styled.div`
   align-items: center;
   justify-content: center;
 
+  p {
+    color: black;
+  }
+
   @media (max-width: 900px) {
     flex-direction: column;
     padding: 30px 20px;
