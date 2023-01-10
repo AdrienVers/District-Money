@@ -114,6 +114,8 @@ const NavbarGlobal = styled.div`
 
   .TextLink {
     position: relative;
+    color: black;
+
     &:after {
       content: "";
       position: absolute;
@@ -124,9 +126,9 @@ const NavbarGlobal = styled.div`
       height: 1.5px;
       transform: scaleY(0);
       background-color: rgb(30, 50, 130);
-
       transition: transform 0.3s;
     }
+
     &:hover {
       &:after {
         transform: scaleY(1);
